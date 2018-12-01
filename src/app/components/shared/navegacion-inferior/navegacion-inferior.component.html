@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark pr-0">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<!-- <span class="navbar-toggler-icon"></span> -->
+		<img class="togglerImagen" src="assets/icos/hamburguesa.svg">
+	</button>
+	<span class="navbarUbicacion">Resultados de búsqueda</span>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="#">{{ categorias[0] }} <span class="sr-only">(current)</span></a>
+      </li>
+      <li *ngFor="let categoria of categorias" 
+          class="nav-item"><a class="nav-link" href="#">{{ categoria.category_name }}</a>
+      </li>
+			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Deportes</a></li>
+			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Juguetería</a></li>
+			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Otra categoría</a></li>
+			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Otra categoría</a></li>
+			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Otra categoría</a></li>
+			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Otra categoría</a></li>
+			<li class="nav-item nav-itemNoMobile dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarMasCategoriasDropdown">Ver todas</a>
+				<?php include 'inc/modalMasCategorias.php';?>
+			</li>
+			<li class="nav-item nav-itemNoMobile dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarUserMenuDropdown">Pedro Mar12</a>
+				<div class="dropdown-menu dropdownUserMenu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item dropdown-itemUserMenu" href="#">Mi Bolsa de Compras</a>
+					<a class="dropdown-item dropdown-itemUserMenu" href="#">Mi Cuenta</a>
+					<a class="dropdown-item dropdown-itemUserMenu" href="#">Mis Compras</a>
+					<a class="dropdown-item dropdown-itemUserMenu" href="#">Mi Wishlist</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item dropdown-itemUserMenu" href="#">Ayuda</a>
+					<a class="dropdown-item dropdown-itemUserMenu" href="#">Cerrar Sesión</a>
+				</div>
+				<div class="modalUserMenuOverlay"></div>
+			</li>
+			<li class="nav-item nav-itemNoDesktop itemFondoSeparador itemFondoDestacado"><a class="nav-link" href="#">Mi Cuenta</a></li>
+			<li class="nav-item nav-itemNoDesktop itemFondoDestacado"><a class="nav-link" href="#">Mi Bolsa de Compras</a></li>
+			<li class="nav-item nav-itemNoDesktop itemFondoDestacado"><a class="nav-link" href="#">Mis Compras</a></li>
+			<li class="nav-item nav-itemNoDesktop itemFondoDestacado"><a class="nav-link" href="#">Mi Wishlist</a></li>
+			<li class="nav-item nav-itemNoDesktop itemFondoSeparador itemFondoDestacado"><a class="nav-link" href="#">Ayuda</a></li>
+			<li class="nav-item nav-itemNoDesktop itemFondoDestacado"><a class="nav-link" href="#">Cerrar Sesión</a></li>
+		</ul>
+	</div>
+</nav>

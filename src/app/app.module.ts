@@ -11,6 +11,10 @@ import { NavegacionInferiorComponent } from './components/shared/navegacion-infe
 
 // Importar Rutas
 import { ROUTES } from './app.routes';
+import { CarrouselHomeComponent } from './components/homepage/carrousel-home/carrousel-home.component';
+import { BanksHomeComponent } from './components/homepage/banks-home/banks-home.component';
+import { FeaturedProductsHomeComponent } from './components/homepage/featured-products-home/featured-products-home.component';
+import { CategoryIconsHomeComponent } from './components/homepage/category-icons-home/category-icons-home.component';
 
 
 
@@ -19,7 +23,11 @@ import { ROUTES } from './app.routes';
     AppComponent,
     HomeComponent,
     NavegacionSuperiorComponent,
-    NavegacionInferiorComponent
+    NavegacionInferiorComponent,
+    CarrouselHomeComponent,
+    BanksHomeComponent,
+    FeaturedProductsHomeComponent,
+    CategoryIconsHomeComponent
   ],
   imports: [
     BrowserModule,

@@ -7,20 +7,58 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active">
-				<a class="nav-link" href="#">{{ categorias[0] }} <span class="sr-only">(current)</span></a>
+				<a class="nav-link" href="#">{{ primerCategoria}} <span class="sr-only">(current)</span></a>
       </li>
-      <li *ngFor="let categoria of categorias" 
-          class="nav-item"><a class="nav-link" href="#">{{ categoria.category_name }}</a>
+      <li *ngFor="let categoriaVisible of categoriasVisibles; " 
+          class="nav-item"><a class="nav-link" href="#">{{ categoriaVisible.category_name }}</a>
       </li>
-			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Deportes</a></li>
+      <li *ngFor="let categoriaNoVisible of categoriasNoVisibles; " 
+          class="nav-item itemNoDesktop"><a class="nav-link" href="#">{{ categoriaNoVisible.category_name }}</a>
+      </li>
+			<!-- <li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Deportes</a></li>
 			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Juguetería</a></li>
 			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Otra categoría</a></li>
 			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Otra categoría</a></li>
 			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Otra categoría</a></li>
-			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Otra categoría</a></li>
+			<li class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">Otra categoría</a></li> -->
 			<li class="nav-item nav-itemNoMobile dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarMasCategoriasDropdown">Ver todas</a>
-				<?php include 'inc/modalMasCategorias.php';?>
+        
+        <!-- <?php include 'inc/modalMasCategorias.php';?> -->
+        <div id="catModalFondo" class="modalMasCategorias fondoCat">
+            <div class="row">
+              <div class="col py-2">
+                <span class="modalMasCategoriasTitulo"><strong>Todas las categorías</strong></span>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-6 col-xl-8">
+          
+                <div class="row">
+                  <ul>
+                    <li *ngFor="let categoriaNoVisible of categoriasNoVisibles;">
+                      <div class="col-6 col-lg-3 col-xl-2 modalMasCategoriasColLink">
+                          <a href="#" class="modalMasCategoriasLink" id="{{ categoriaNoVisible.category_name }}">{{ categoriaNoVisible.category_name }}</a>
+                      </div>
+                      <!-- <div class="col-6 col-lg-3 col-xl-2 modalMasCategoriasColLink">
+                        <a href="#" class="modalMasCategoriasLink" id="catJugueteria">Segunda</a>
+                      </div> -->
+                    </li>
+                  </ul>
+                    
+
+
+                </div>
+          
+              </div>
+              <div class="col-6 col-xl-4">
+          
+              </div>
+            </div>
+          
+          </div>
+          <div class="modalMasCategoriasOverlay"></div>
+
 			</li>
 			<li class="nav-item nav-itemNoMobile dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarUserMenuDropdown">Pedro Mar12</a>

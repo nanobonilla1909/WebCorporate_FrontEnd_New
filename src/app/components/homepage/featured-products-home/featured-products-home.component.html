@@ -1,3 +1,22 @@
-<p>
-  featured-products-home works!
-</p>
+<div class="backgroundGrisA">
+    <div class="container containerPaddingExtra">
+      <div class="row">
+        <div class="col">
+          <h2 class="tituloSeccionSecundario">Productos recomendados</h2><a href="#" class="linkMas">Ver más</a>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div  *ngFor="let featured_product of featured_products;">     
+          
+              <app-product-card [featured_product]="featured_product"></app-product-card>
+
+          
+
+        </div>
+      
+
+      </div>
+    </div>
+</div>
+

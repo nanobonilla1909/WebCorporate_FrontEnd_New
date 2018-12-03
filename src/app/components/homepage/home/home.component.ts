@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiWebcorporateService } from '../../../services/api-webcorporate.service';
 
 
 @Component({
@@ -10,7 +11,7 @@ export class HomeComponent implements OnInit {
 
 
 
-  constructor() { 
+  constructor(private api_webcorporate: ApiWebcorporateService) { 
 
   }
 

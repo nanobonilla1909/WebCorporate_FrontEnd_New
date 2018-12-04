@@ -11,17 +11,14 @@ export class FeaturedProductsHomeComponent implements OnInit {
 
 
   featured_products: FeaturedProduct[] = [];
-  mis_productos: any[] = [];
+
 
   constructor(private http:ApiWebcorporateService) {
 
     this.http.getFeaturedProducts()
       .subscribe( (resp: any) => {
         this.featured_products = resp.data;
-        // this.mis_productos = ['Unos','Dos','Tres'];
-        // this.mis_productos = resp.data;
-        // console.log("Estoy en featured_products_home_componens")
-        // console.log(this.featured_products);
+
       });
 
 

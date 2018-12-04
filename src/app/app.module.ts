@@ -22,6 +22,9 @@ import { ROUTES } from './app.routes';
 
 // Importar Servicios
 import { ApiWebcorporateService } from './services/api-webcorporate.service';
+import { SuscriptionsComponent } from './components/shared/suscriptions/suscriptions.component';
+import { SocialNetworksComponent } from './components/shared/social-networks/social-networks.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
 
 
 
@@ -37,7 +40,10 @@ import { ApiWebcorporateService } from './services/api-webcorporate.service';
     CategoryIconsHomeComponent,
     ProductCardComponent,
     HighlightedItemsHomeComponent,
-    ResultsComponent
+    ResultsComponent,
+    SuscriptionsComponent,
+    SocialNetworksComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

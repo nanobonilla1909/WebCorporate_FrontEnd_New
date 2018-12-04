@@ -20,4 +20,11 @@ export class ApiWebcorporateService {
     return this.http.get('http://localhost:8000/api/featured_products');
   }
 
+
+  getHighlightedItems()
+  {
+    return this.http.get('http://localhost:8000/api/highlighted_items');
+
+  }
+
 }

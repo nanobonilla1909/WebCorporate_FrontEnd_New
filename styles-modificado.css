@@ -1,11 +1,11 @@
 @font-face {
 	font-family:'Roboto-Regular';
-	src:url('/assets/tipografias/roboto/Roboto-Regular.ttf') format('truetype');
+	src:url('tipografias/roboto/Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face {
 	font-family:'Roboto-Light';
-	src:url('/assets/tipografias/roboto/Roboto-Light.ttf') format('truetype');
+	src:url('tipografias/roboto/Roboto-Light.ttf') format('truetype');
 }
 
 body {
@@ -71,7 +71,7 @@ a:hover,
 .notaCuotas {
 	font-size:1.4rem;
 	/*font-weight:300;*/
-		font-family:Roboto-Light, "Arial", sans-serif;
+		font-family:Roboto-Light, "Arial", sans-serif
 }
 
 .containerPaddingExtra {
@@ -756,7 +756,7 @@ a:hover,
 .busquedaCantResultados {
 	/*font-weight:300;*/
 	margin-bottom:1rem;
-		font-family:Roboto-Light, "Arial", sans-serif;
+		font-family:Roboto-Light, "Arial", sans-serif
 }
 
 .busquedaFiltrosActivos {
@@ -816,7 +816,7 @@ a:hover,
 
 .busquedaFiltrosItemCantidad {
 	/*font-weight:300;*/
-		font-family:Roboto-Light, "Arial", sans-serif;
+		font-family:Roboto-Light, "Arial", sans-serif
 	opacity:.7;
 }
 
@@ -907,7 +907,7 @@ a:hover,
 	margin-top:.5rem;
 	padding:0 1.5rem 0 0;
 	/*font-weight:300;*/
-		font-family:Roboto-Light, "Arial", sans-serif;
+		font-family:Roboto-Light, "Arial", sans-serif
 }
 
 .modalProductoPrecioAnterior,
@@ -919,7 +919,7 @@ a:hover,
 
 .modalProductoPrecioAnterior {
 	/*font-weight:300;*/
-		font-family:Roboto-Light, "Arial", sans-serif;
+		font-family:Roboto-Light, "Arial", sans-serif
 	color:#bbb;
 	font-size:.9rem;
 }
@@ -942,7 +942,7 @@ a:hover,
 	font-size:2rem;
 	margin:0 .70rem;
 	/*font-weight:300;*/
-		font-family:Roboto-Light, "Arial", sans-serif;
+		font-family:Roboto-Light, "Arial", sans-serif
 }
 
 .modalProductoPrecioPromo {
@@ -957,7 +957,7 @@ a:hover,
 
 .modalProductoTag {
 	/*font-weight:300;*/
-		font-family:Roboto-Light, "Arial", sans-serif;
+		font-family:Roboto-Light, "Arial", sans-serif
 }
 
 .modalProductoTag img {
@@ -1002,7 +1002,7 @@ a:hover,
 .modalProductoSelectorCantidadPrecioFinal {
 	font-size:2rem;
 	/*font-weight:300;*/
-		font-family:Roboto-Light, "Arial", sans-serif;
+		font-family:Roboto-Light, "Arial", sans-serif
 }
 
 .margenInferior {
@@ -1304,7 +1304,7 @@ a:hover,
 
 .bolsaComprasPrecioUnidad {
 	/*font-weight:300;*/
-		font-family:Roboto-Light, "Arial", sans-serif;
+		font-family:Roboto-Light, "Arial", sans-serif
 	margin-right:.5rem;
 	font-size:.75rem;
 }

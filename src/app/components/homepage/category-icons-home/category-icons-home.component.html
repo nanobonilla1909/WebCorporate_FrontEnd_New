@@ -5,79 +5,20 @@
       </div>
     </div>
     <br>
+    
     <div class="row">
-      <div class="col-6 col-sm-3 col-xl text-center">
-        <a class="categoriaItem" href="#">
-          <div class="categoriaItemCirculo">
-            <img src="assets/icos/comestibles.svg">
-          </div>
-          <div class="categoriaItemNombre">Comestibles</div>
-        </a>
-      </div>
-  
-      <div class="col-6 col-sm-3 col-xl text-center">
-        <a class="categoriaItem" href="#">
-          <div class="categoriaItemCirculo">
-            <img src="assets/icos/bebidas.svg">
-          </div>
-          <div class="categoriaItemNombre">Bebidas</div>
-        </a>
-      </div>
-  
-      <div class="col-6 col-sm-3 col-xl text-center">
-        <a class="categoriaItem" href="#">
-          <div class="categoriaItemCirculo">
-            <img src="assets/icos/cosmetica.svg">
-          </div>
-          <div class="categoriaItemNombre">Cosmética</div>
-        </a>
-      </div>
-  
-      <div class="col-6 col-sm-3 col-xl text-center">
-        <a class="categoriaItem" href="#">
-          <div class="categoriaItemCirculo">
-            <img src="assets/icos/equipajes.svg">
-          </div>
-          <div class="categoriaItemNombre">Equipajes</div>
-        </a>
-      </div>
-  
-      <div class="col-6 col-sm-3 col-xl text-center">
-        <a class="categoriaItem" href="#">
-          <div class="categoriaItemCirculo">
-            <img src="assets/icos/fragancias.svg">
-          </div>
-          <div class="categoriaItemNombre">Fragancias</div>
-        </a>
-      </div>
-  
-      <div class="col-6 col-sm-3 col-xl text-center">
-        <a class="categoriaItem" href="#">
-          <div class="categoriaItemCirculo">
-            <img src="assets/icos/lentes.svg">
-          </div>
-          <div class="categoriaItemNombre">Lentes</div>
-        </a>
-      </div>
-  
-      <div class="col-6 col-sm-3 col-xl text-center">
-        <a class="categoriaItem" href="#">
-          <div class="categoriaItemCirculo">
-            <img src="assets/icos/relojes.svg">
-          </div>
-          <div class="categoriaItemNombre">Relojes</div>
-        </a>
-      </div>
-  
-      <div class="col-6 col-sm-3 col-xl text-center">
-          <a class="categoriaItem" href="#">
-            <div class="categoriaItemCirculo">
-              <img src="assets/icos/vertodas.svg">
-            </div>
-            <div class="categoriaItemNombre">Ver Todas</div>
-          </a>
-        </div>
 
+        <div  *ngFor="let category_icon of categoriasVisibles;">
+            <div class="col-6 col-sm-3 col-xl text-center">
+                <a class="categoriaItem" href="#">
+                  <div class="categoriaItemCirculo">
+                    <img [src]="category_icon.category_icon">
+                  </div>
+                  <div class="categoriaItemNombre">{{ category_icon.category_name }}</div>
+                </a>
+            </div>
+        </div>    
     </div>
+
   </div>
   

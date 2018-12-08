@@ -17,6 +17,7 @@ constructor(private http:ApiWebcorporateService) {
     this.http.getHighlightedItems()
       .subscribe( (resp: any) => {
         this.highlighted_items = resp.data;
+        console.log(this.highlighted_items);
 
       });
 

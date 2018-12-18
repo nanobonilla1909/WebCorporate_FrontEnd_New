@@ -27,4 +27,13 @@ export class ApiWebcorporateService {
 
   }
 
+  getCategoryChildren(product_category)
+  {
+
+    const url = 'http://localhost:8000/api/category_last_products_children/' + product_category;
+    console.log(url);
+
+    return this.http.get(url);
+  }
+
 }

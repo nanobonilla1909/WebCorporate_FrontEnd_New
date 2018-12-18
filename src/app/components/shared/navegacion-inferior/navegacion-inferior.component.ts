@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiWebcorporateService } from '../../../services/api-webcorporate.service';
+import { Router } from '@angular/router';
 
 interface OrdenCategorias{
   position: number;
@@ -28,7 +29,7 @@ export class NavegacionInferiorComponent {
   
 
 
-  constructor( private http:ApiWebcorporateService ) { 
+  constructor( private http:ApiWebcorporateService, private router:Router ) { 
 
 
     this.http.getCategoriesOrder()
@@ -43,25 +44,14 @@ export class NavegacionInferiorComponent {
 
   }
 
-   // constructor( private http:HttpClient ) { 
+  onClick(category_id: number, category_name: string) {
+    
+    this.router.navigate(['/results', { category_id: category_id, category_name: category_name}]);
+    // console.log(category_id);
 
-  
-  //   this.http.get('http://localhost:8000/api/home_page_category_orders')
-  //     .subscribe( (resp: any) => {
-  //       this.categorias = resp.data;
-        
-  //       console.log(this.categorias);
-  //       this.primerCategoria = this.categorias[0].category_name
-        
-  //       console.log( this.primerCategoria );
-        
-  //       this.categoriasVisibles = this.filterByPosition(this.categorias, {min:2, max:6})
-  //       this.categoriasNoVisibles = this.filterByPosition(this.categorias, {min:7, max:11})
+  }
 
-
-  //     })
-
-  // }
+x
 
 
 

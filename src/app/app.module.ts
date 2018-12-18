@@ -25,9 +25,11 @@ import { ApiWebcorporateService } from './services/api-webcorporate.service';
 import { SuscriptionsComponent } from './components/shared/suscriptions/suscriptions.component';
 import { SocialNetworksComponent } from './components/shared/social-networks/social-networks.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { NavegacionResultadosComponent } from './components/resultspage/navegacion-resultados/navegacion-resultados.component';
+import { BreadcrumbCategoriasComponent } from './components/resultspage/breadcrumb-categorias/breadcrumb-categorias.component';
 
 
-
+  
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,12 +45,15 @@ import { FooterComponent } from './components/shared/footer/footer.component';
     ResultsComponent,
     SuscriptionsComponent,
     SocialNetworksComponent,
-    FooterComponent
+    FooterComponent,
+    NavegacionResultadosComponent,
+    BreadcrumbCategoriasComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot( ROUTES, { useHash: true } )
+    // RouterModule.forRoot( ROUTES, { useHash: true, enableTracing: true } )
   ],
   providers: [
     ApiWebcorporateService

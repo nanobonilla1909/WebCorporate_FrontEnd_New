@@ -1,19 +1,9 @@
-<app-navegacion-superior></app-navegacion-superior>
-<app-navegacion-inferior></app-navegacion-inferior>
-<br>
-<app-breadcrumb-categorias></app-breadcrumb-categorias>
-
+<!-- 
 <div class="backgroundGrisA">
     <div class="container">
       <div class="row text-center">
         <div class="col-12 col-md-6 columnaFlex columnaFlexResultados justify-content-start pt-3 py-md-0">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="#">Cosmética</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Rimmel</li>
-            </ol>
-          </nav>
+            <app-breadcrumb-categorias [breadcrumbPath]="getbreadcrumbPath()"></app-breadcrumb-categorias>
         </div>
         <div class="col-9 col-md-4 col-xl-5 columnaFlex columnaFlexResultados justify-content-start justify-content-md-end py-0">
           <span class="dropdownOrdenarEtiqueta">Ordenar por:</span>
@@ -29,8 +19,8 @@
           </div>
         </div>
         <div class="col-3 col-md-2 col-xl-1 pr-lg-0 columnaFlex columnaFlexRight">
-          <button class="vistaResultados vistaResultadosActiva" title="Ver grilla"><img src="icos/vistaCards.svg"></button>
-          <button class="vistaResultados" title="Ver listado"><img src="icos/vistaBlocks.svg"></button>
+          <button class="vistaResultados vistaResultadosActiva" title="Ver grilla"><img src="assets/icos/vistaCards.svg"></button>
+          <button class="vistaResultados" title="Ver listado"><img src="assets/icos/vistaBlocks.svg"></button>
         </div>
       </div>
     </div>
@@ -38,4 +28,4 @@
 
 
 
-
+ -->

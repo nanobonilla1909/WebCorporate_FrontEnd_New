@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-breadcrumb-categorias',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BreadcrumbCategoriasComponent implements OnInit {
 
+  @Input()
+  breadcrumbPath: object;
+
+
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

@@ -27,6 +27,8 @@ import { SocialNetworksComponent } from './components/shared/social-networks/soc
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { NavegacionResultadosComponent } from './components/resultspage/navegacion-resultados/navegacion-resultados.component';
 import { BreadcrumbCategoriasComponent } from './components/resultspage/breadcrumb-categorias/breadcrumb-categorias.component';
+import { PanelFiltrosComponent } from './components/resultspage/panel-filtros/panel-filtros.component';
+import { FiltrosCategoriasComponent } from './components/resultspage/filtros-categorias/filtros-categorias.component';
 
 
   
@@ -47,7 +49,9 @@ import { BreadcrumbCategoriasComponent } from './components/resultspage/breadcru
     SocialNetworksComponent,
     FooterComponent,
     NavegacionResultadosComponent,
-    BreadcrumbCategoriasComponent
+    BreadcrumbCategoriasComponent,
+    PanelFiltrosComponent,
+    FiltrosCategoriasComponent
   ],
   imports: [
     BrowserModule,

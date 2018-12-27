@@ -27,12 +27,27 @@ export class ApiWebcorporateService {
 
   }
 
-  getCategoryChildren(product_category)
+
+  // Trae los productos del ultimo nivel correspondiente a un nodo dado
+  // ------------------------------------------------------------------
+
+  getCategoryChildren(product_category_id)
   {
 
-    const url = 'http://localhost:8000/api/category_last_products_children/' + product_category;
-    console.log(url);
+    const url = 'http://localhost:8000/api/category_last_products_children/' + product_category_id;
+ 
+    return this.http.get(url);
+  }
 
+
+  // Trae las Categorias hijas correspondientes a un nodo dado
+  // ---------------------------------------------------------
+
+  getChildrenCategories(product_category_id)
+  {
+
+    const url = 'http://localhost:8000/api/category_children/' + product_category_id;
+ 
     return this.http.get(url);
   }
 

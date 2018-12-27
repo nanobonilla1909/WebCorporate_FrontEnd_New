@@ -1,0 +1,16 @@
+<span class="busquedaKeyword">{{ currentCategoryName }}</span>
+
+<span class="busquedaCantResultados">{{currentCategoryProductsCount}} Resultados</span>
+
+	<div class="busquedaFiltrosGrupo mb-3">
+		<span class="busquedaFiltrosHeader">Sub Categorías</span>
+
+
+    <span *ngFor="let item of currentCategoryChildren" class="busquedaFiltrosItem">
+			<a class="busquedaFiltrosSubCategoria" href="#">
+          {{ item.category_name }}
+				<span class="busquedaFiltrosItemCantidad">(10)</span>
+			</a>
+		</span>
+     
+	</div>

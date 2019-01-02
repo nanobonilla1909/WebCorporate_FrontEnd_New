@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-filtros-categorias',
@@ -16,13 +17,21 @@ export class FiltrosCategoriasComponent implements OnInit {
   @Input()
   currentCategoryChildren: any[];
 
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
-    console.log("en filtros categoria...");
+    // console.log("en filtros categoria...");
     
-    console.log(this.currentCategoryChildren);
+    // console.log(this.currentCategoryChildren);
     
   }
+
+  onClick(category_id: number, category_name: string) {
+     console.log(category_id, category_name);
+    this.router.navigate(['/results', { category_id: category_id, category_name: category_name}]);
+   
+
+  }
+
 
 }

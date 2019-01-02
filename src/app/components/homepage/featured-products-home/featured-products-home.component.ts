@@ -25,6 +25,9 @@ export class FeaturedProductsHomeComponent implements OnInit {
    }
 
   ngOnInit() {
+
+    
+
   }
 
 }

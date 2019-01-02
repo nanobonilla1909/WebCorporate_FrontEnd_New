@@ -2,15 +2,19 @@
 
 <span class="busquedaCantResultados">{{currentCategoryProductsCount}} Resultados</span>
 
-	<div class="busquedaFiltrosGrupo mb-3">
+	<div *ngIf="currentCategoryChildren.length >0"  class="busquedaFiltrosGrupo mb-3">
 		<span class="busquedaFiltrosHeader">Sub Categorías</span>
 
+		<span *ngFor="let subCategory of currentCategoryChildren" class="busquedaFiltrosItem">
 
-    <span *ngFor="let item of currentCategoryChildren" class="busquedaFiltrosItem">
-			<a class="busquedaFiltrosSubCategoria" href="#">
-          {{ item.category_name }}
-				<span class="busquedaFiltrosItemCantidad">(10)</span>
+			<a class="busquedaFiltrosSubCategoria" 
+								[routerLink]="['/results']" 
+								[queryParams]="{ category_id: subCategory.category_id, 
+									category_name: subCategory.category_name }"
+					>{{ subCategory.category_name }}
+					<span class="busquedaFiltrosItemCantidad">(10)</span>
 			</a>
+		
 		</span>
      
 	</div>

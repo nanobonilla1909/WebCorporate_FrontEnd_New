@@ -1,27 +1,24 @@
 
-
-  <div class="col-12 col-sm-6 col-lg">
-      <a class="productoItemTarjeta" href="#" data-toggle="modal" data-target="#exampleModal">
-        
-          <div class="productoContenedorImagen">
-              <div class="productoEtiquetaPromo">
-                <div class="productoEtiquetaSombra"></div>
-                <img class="d-none d-xl-inline" src="assets/icos/promoEtiqueta.svg">¡5% OFF en la 2da. unidad!
-              </div>
-              <!-- <img class="productoImagen" src="productos/alfajores.jpg"> -->
-              <img class="productoImagen" [src]="featured_product.product_image">
-            </div>
-            <div class="productoContenedorBlockSide">
-              <span class="productoNombre">{{ featured_product.product_name}}</span>
-              <span class="productoDescripcion">xxxxxxx</span>
-              <div class="productoContB">
-                <span class="productoPrecio">{{ featured_product.product_price }}<span class="productoPrecioDecimal">49</span></span>
-                <button title="Agregar a Mi Wishlist" class="productoFavorito" href="#"><img src="assets/icos/favorito0.svg"></button>
-              </div>
-              <div class="productoAgregarBolsaContenedor">
-                <button title="Agregar a la Bolsa de Compras" class="productoAgregarBolsa">Añadir a la bolsa</button>
-              </div>
-            </div>
-
-      </a>
-    </div>
+<div class="col-12 col-sm-6 col-lg">
+    <a class="productoItemTarjeta" href="#" data-toggle="modal" data-target="#exampleModal">
+      
+      <div class="productoContenedorImagen">
+        <div class="productoEtiquetaPromo">
+            <div class="productoEtiquetaSombra"></div>
+            <img class="d-none d-xl-inline" src="assets/icos/promoEtiqueta.svg">¡5% OFF en la 2da. unidad!
+          </div>
+          <img class="productoImagen" [src]="product.image">
+        </div>
+        <div class="productoContenedorBlockSide">
+          <span class="productoNombre">{{ product.name}}</span>
+          <span class="productoDescripcion">xxxxxxx</span>
+          <div class="productoContB">
+            <span class="productoPrecio">{{ product.price }}<span class="productoPrecioDecimal">49</span></span>
+            <button title="Agregar a Mi Wishlist" class="productoFavorito" href="#"><img src="assets/icos/favorito0.svg"></button>
+          </div>
+          <div class="productoAgregarBolsaContenedor">
+            <button title="Agregar a la Bolsa de Compras" class="productoAgregarBolsa">Añadir a la bolsa</button>
+          </div>
+      </div>
+    </a>
+</div>

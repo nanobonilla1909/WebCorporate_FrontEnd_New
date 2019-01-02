@@ -22,9 +22,9 @@ export class PanelFiltrosComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log("en panel filtros ...");
+    // console.log("en panel filtros ...");
     
-    console.log(this.currentCategoryChildren);
+    // console.log(this.currentCategoryChildren);
   }
 
   getCurrentCategoryName(){

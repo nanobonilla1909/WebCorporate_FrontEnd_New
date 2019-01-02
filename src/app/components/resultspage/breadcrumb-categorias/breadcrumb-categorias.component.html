@@ -3,15 +3,19 @@
     <div class="breadcrumb">
         <ul *ngFor="let node of breadcrumbPath;">
       
-            <li class="breadcrumb-item"><a href="#" id="{{ node.categName }}">/ {{ node.categName }}</a></li>
-            
-            <!-- <li class="breadcrumb-item active" aria-current="page">Rimmel</li> -->
+            <li class="breadcrumb-item">
+                <!-- <a href="#" id="{{ node.categName }}">/ {{ node.categName }}</a> -->
+
+                <a (click)="onClick(node.categId, node.categName)"
+                    [routerLink]="['/results']" 
+                    [queryParams]="{ category_id: node.categId, 
+                        category_name: node.categName }">/ {{ node.categName }}
+                </a>
+
+            </li>
+
           </ul>
     </div>
     
 </nav>
 
-<!-- <div *ngFor="let categoria of categorias;" class="col-6 col-lg-3 col-xl-2 modalMasCategoriasColLink">
-    <a href="#" (click)="onClick()" class="modalMasCategoriasLink" id="{{ categoria.category_name }}">{{ categoria.category_name }}</a>
-</div> -->
-       

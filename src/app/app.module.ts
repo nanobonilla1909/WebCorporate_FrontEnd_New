@@ -56,7 +56,7 @@ import { FiltrosCategoriasComponent } from './components/resultspage/filtros-cat
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot( ROUTES, { useHash: true } )
+    RouterModule.forRoot( ROUTES, { useHash: false } )
     // RouterModule.forRoot( ROUTES, { useHash: true, enableTracing: true } )
   ],
   providers: [

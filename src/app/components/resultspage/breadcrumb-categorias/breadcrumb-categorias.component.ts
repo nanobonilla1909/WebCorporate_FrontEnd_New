@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class BreadcrumbCategoriasComponent implements OnInit {
 
   @Input()
-  breadcrumbPath: object;
+  breadcrumbPath: {categId: number, categName: string}[];
 
 
   constructor() { }
@@ -16,5 +16,12 @@ export class BreadcrumbCategoriasComponent implements OnInit {
   ngOnInit() {
     
   }
+
+  onClick(category_id: number, category_name: string) {
+    
+    var index = this.breadcrumbPath.findIndex(x=>x.categId === category_id);
+    this.breadcrumbPath.splice(index, 3);
+
+ }
 
 }

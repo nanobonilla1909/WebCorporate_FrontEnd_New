@@ -7,15 +7,9 @@
       </div>
       <br>
       <div class="row">
-        <div  *ngFor="let featured_product of featured_products;">     
-          
-              <app-product-card [featured_product]="featured_product"></app-product-card>
-
-          
-
+        <div  *ngFor="let featured_product of featured_products;">                 
+            <app-product-card [product]="featured_product"></app-product-card>
         </div>
-      
-
       </div>
     </div>
 </div>

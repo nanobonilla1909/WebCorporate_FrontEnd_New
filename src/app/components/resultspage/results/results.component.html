@@ -46,7 +46,9 @@
 
                 </div>
                 <div class="col-12 col-lg-9 columnaResultados">
-                    <h1>Aca van los productos</h1>
+                    <div  *ngFor="let product of products;" class="productoItemTarjeta productoItemTarjetaBlock">                 
+                            <app-product-card [product]="product"></app-product-card>
+                        </div>
                 </div>    
         </div>
     </div>

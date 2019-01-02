@@ -7,11 +7,19 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 
-      <li *ngFor="let categoriaVisible of categoriasVisibles; " 
-          class="nav-item"><a class="nav-link" (click)="onClick(categoriaVisible.product_category_id, categoriaVisible.category_name)">{{ categoriaVisible.category_name }}</a>
-      </li>
-      <li *ngFor="let categoriaNoVisible of categoriasNoVisibles; " 
-          class="nav-item nav-itemNoDesktop"><a class="nav-link" href="#">{{ categoriaNoVisible.category_name }}</a>
+			<!-- Menu Horizonta de Categorias Visibles -->
+      <li *ngFor="let categoriaVisible of categoriasVisibles; " class="nav-item">
+				<!-- <a class="nav-link" (click)="onClick(categoriaVisible.product_category_id, categoriaVisible.category_name)">{{ categoriaVisible.category_name }}</a> -->
+				<!-- <a class="nav-link" [routerLink]="['/results', categoriaVisible.product_category_id, categoriaVisible.category_name]"  -->
+				<a class="nav-link" 
+						[routerLink]="['/results']" 
+						[queryParams]="{ category_id: categoriaVisible.product_category_id, 
+							category_name: categoriaVisible.category_name }"
+						>{{ categoriaVisible.category_name }}</a>
+			</li>
+			
+      <li *ngFor="let categoriaNoVisible of categoriasNoVisibles; " class="nav-item nav-itemNoDesktop">
+				<a class="nav-link" href="#">{{ categoriaNoVisible.category_name }}</a>
       </li>
 		
 			<li class="nav-item nav-itemNoMobile dropdown">

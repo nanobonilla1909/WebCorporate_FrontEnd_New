@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FormsModule }   from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -29,6 +30,8 @@ import { NavegacionResultadosComponent } from './components/resultspage/navegaci
 import { BreadcrumbCategoriasComponent } from './components/resultspage/breadcrumb-categorias/breadcrumb-categorias.component';
 import { PanelFiltrosComponent } from './components/resultspage/panel-filtros/panel-filtros.component';
 import { FiltrosCategoriasComponent } from './components/resultspage/filtros-categorias/filtros-categorias.component';
+import { FiltrosAtributosComponent } from './components/resultspage/filtros-atributos/filtros-atributos.component';
+import { ProductResultsFilterPipe } from './components/resultspage/results/product-results-fliter.pipe';
 
 
   
@@ -51,11 +54,14 @@ import { FiltrosCategoriasComponent } from './components/resultspage/filtros-cat
     NavegacionResultadosComponent,
     BreadcrumbCategoriasComponent,
     PanelFiltrosComponent,
-    FiltrosCategoriasComponent
+    FiltrosCategoriasComponent,
+    FiltrosAtributosComponent,
+    ProductResultsFilterPipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot( ROUTES, { useHash: false } )
     // RouterModule.forRoot( ROUTES, { useHash: true, enableTracing: true } )
   ],

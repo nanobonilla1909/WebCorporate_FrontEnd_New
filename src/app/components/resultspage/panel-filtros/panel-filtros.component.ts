@@ -1,5 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+interface AttributesValues{
+  type_id: number;
+  name: string;
+  options_id: number;
+  value: string;
+}
+
 @Component({
   selector: 'app-panel-filtros',
   templateUrl: './panel-filtros.component.html',
@@ -17,14 +24,13 @@ export class PanelFiltrosComponent implements OnInit {
   @Input()
   currentCategoryChildren: any[];
 
-  
+  @Input()
+  product_attributes1: AttributesValues[];
 
   constructor() { }
 
   ngOnInit() {
-    // console.log("en panel filtros ...");
     
-    // console.log(this.currentCategoryChildren);
   }
 
   getCurrentCategoryName(){
@@ -40,5 +46,6 @@ export class PanelFiltrosComponent implements OnInit {
     
     return this.currentCategoryChildren;
   }
+
 
 }

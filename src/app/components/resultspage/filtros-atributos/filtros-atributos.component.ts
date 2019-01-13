@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
-import { Logs } from 'selenium-webdriver';
+
 
 interface AttributesValues{
   type_id: number;
@@ -22,11 +22,15 @@ export class FiltrosAtributosComponent implements OnInit {
   type_id_2: number;
 
   selectedCheckBox: boolean[] = [false, false, false, false];
-  selectedCheckBox2: boolean; 
+  selectedCheckBox2: boolean = true; 
+  selectedOptions: number[]=[3, 6];
   opc1:any;
 
   @Output()
   selectionDone: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Output()
+  selectionDoneDef =  new EventEmitter();
 
   @Input()
   product_attributes1: AttributesValues[];
@@ -42,18 +46,13 @@ export class FiltrosAtributosComponent implements OnInit {
 
   ngOnInit() {
 
-      // if (this.product_attributes1.length > 0) {
-      //   this.type_id_1 = this.product_attributes1[0].type_id;
-      // }
-      // if (this.product_attributes2.length > 0) {
-      //   this.type_id_2 = this.product_attributes2[0].type_id;
-      // }
-      console.log("OnInit")
-      console.log(this.product_attributes1);
-      // console.log('Leyenda', this.array_leyenda)
+     
   }
 
   attribSelectionChanged(){
+    // this.selectionDoneDef.emit(this.selectedOptions); 
+    console.log("PASSSSSSSAAAAAA");
+    console.log(this.selectedCheckBox2);
     this.selectionDone.emit(this.selectedCheckBox2); 
   }
 
@@ -65,10 +64,7 @@ export class FiltrosAtributosComponent implements OnInit {
     // console.log(y);
   }
 
-  imprimir() {
-    // console.log('selectedCheckBox[0]: ' + this.selectedCheckBox[0]);
-    this.selectionDone.emit(this.selectedCheckBox[0]);
-  }
+
 
  
   // ngAfterContentInit() {

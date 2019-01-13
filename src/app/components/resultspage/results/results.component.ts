@@ -7,14 +7,14 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 
 
-interface ProductResults{
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  showed: boolean;
-}
+// interface ProductResults{
+//   id: number;
+//   name: string;
+//   description: string;
+//   price: number;
+//   image: string;
+//   showed: boolean;
+// }
 
 interface CharacterizedProduct{
   product_id: number;
@@ -46,8 +46,8 @@ export class ResultsComponent implements OnInit {
   searchTerm: string; 
 
   products: any[] = [];
-  products_results: ProductResults[] = [];
-  products_results_filtered: ProductResults[] = [];
+  products_results: Product[] = [];
+  products_results_filtered: number[] = [];
   characterized_products: CharacterizedProduct[] = [];
   characterized_products_sorted: CharacterizedProduct[] = [];
   product_attributes: AttributesValues[] = [];
@@ -55,6 +55,8 @@ export class ResultsComponent implements OnInit {
   product_attributes2: AttributesValues[] = [];
   product_attributes3: AttributesValues[] = [];
   product_attributes4: AttributesValues[] = [];
+  selectedAtributtes: {type_id: number, options_id: number}[] = [];
+  selectedOptions: number[] = [];
   selectedAtributtes1: boolean[] = [false, false, false, false];
   children_categories: any[] = [];
 
@@ -68,8 +70,19 @@ export class ResultsComponent implements OnInit {
   }
   
 
+
 ngOnInit() {
     
+
+    // Simula un selectedAttributes ficticio
+    this.selectedAtributtes.push({type_id: 1, options_id: 3});
+    this.selectedAtributtes.push({type_id: 2, options_id: 4});
+    this.selectedOptions.push(3);
+    this.selectedOptions.push(4);
+
+    
+
+
 
     // Prepara el breadcrumb
     this.breadCrumb.push({categId: 0, categName: 'Inicio'});
@@ -94,14 +107,19 @@ ngOnInit() {
 
       if (this.selectedCategory != null) {
 
+        this.products_results = [];
+        this.products_results_filtered = [];
         this.http.getCategoryProductChildren(this.selectedCategory)
             .subscribe( (resp: any) => {
             this.products = resp.data;
             this.products_results = [];
             for (let unProd of this.products) {
               this.products_results.push({id: unProd.id, name:unProd.name, description:unProd.description, price: unProd.price, image: unProd.image, showed: true})
+              this.products_results_filtered.push(unProd.id)
             } 
       
+            console.log(this.products_results_filtered);
+            
             this.qtyProductsSelectedCategory = this.products.length;
   
             }); 
@@ -192,17 +210,17 @@ ngOnInit() {
             }  
 
 
-            console.log(this.characterized_products_sorted);
-            console.log("product_attributes");
-            console.log(this.product_attributes);
-            console.log("product_attributes1");
-            console.log(this.product_attributes1); 
-            console.log("product_attributes2");
-            console.log(this.product_attributes2);
-            console.log("product_attributes3");
-            console.log(this.product_attributes3); 
-            console.log("product_attributes4");
-            console.log(this.product_attributes4);
+            // console.log(this.characterized_products_sorted);
+            // console.log("product_attributes");
+            // console.log(this.product_attributes);
+            // console.log("product_attributes1");
+            // console.log(this.product_attributes1); 
+            // console.log("product_attributes2");
+            // console.log(this.product_attributes2);
+            // console.log("product_attributes3");
+            // console.log(this.product_attributes3); 
+            // console.log("product_attributes4");
+            // console.log(this.product_attributes4);
             
             
   
@@ -221,9 +239,15 @@ ngOnInit() {
   }
 
 
-  seleccionaronEnHijo(valor: boolean) {
+  seleccionaronEnHijo(valor) {
 
-    this.selectedAtributtes1[0] = valor;
+    console.log("PASABBBBBBBB");
+    console.log(typeof(valor));
+    console.log(valor.returnValue);
+    
+    this.products_results_filtered = [6, 7];
+    // console.log(this.products_results_filtered);
+    
 
   }
 
@@ -256,5 +280,6 @@ ngOnInit() {
     
     return this.product_attributes1;
   }
+
 
 }

@@ -64,6 +64,9 @@ export class ResultsComponent implements OnInit {
   qtyProductsSelectedCategory: number;
 
 
+  selectedCheckBox2: boolean = true; 
+
+
   constructor(private route: ActivatedRoute, private router:Router, private http: ApiWebcorporateService) 
   {
 
@@ -239,11 +242,14 @@ ngOnInit() {
   }
 
 
-  seleccionaronEnHijo(valor) {
+  seleccionaronEnHijo(valor: boolean) {
 
     console.log("PASABBBBBBBB");
     console.log(typeof(valor));
-    console.log(valor.returnValue);
+    this.selectedCheckBox2 = valor;
+    console.log(this.selectedCheckBox2);
+    
+    // console.log(valor.returnValue);
     
     this.products_results_filtered = [6, 7];
     // console.log(this.products_results_filtered);

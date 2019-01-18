@@ -23,7 +23,7 @@
 
         <span class="busquedaFiltrosItem">
             <label>
-                <input type="checkbox" [(ngModel)]="selectedCheckBox2" name="xxx" (change)="attribSelectionChanged()"> Selected
+                <input type="checkbox" [(ngModel)]="selectedCheckBox2" name="xxx" (change)="attributesSelectionChanged()"> Selected
             </label>
         </span>
 
@@ -41,17 +41,14 @@
           </span>
 
 
-        <span class="busquedaFiltrosItem">
-          <input type="checkbox" name="marca" checked>
-          <label for="avon">Avon</label>
+        <span *ngFor="let atributo of product_attributes1; let i = index" class="busquedaFiltrosItem">
+
+            <span class="busquedaFiltrosItem">
+                <input type="checkbox" [attr.data-name]="i" (change)="log(opc1)">
+                <label for="">{{ atributo.value }}</label>
+            </span>
+          
         </span>
-
-
-        <span class="busquedaFiltrosItem">
-          <input type="checkbox" name="marca" value="Mac">
-          <label for="mac">Mac</label>
-        </span>
-
 
         <p>
           {{ f.value | json }}

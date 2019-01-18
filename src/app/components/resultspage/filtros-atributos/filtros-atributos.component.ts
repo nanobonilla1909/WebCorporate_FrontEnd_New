@@ -23,15 +23,16 @@ export class FiltrosAtributosComponent implements OnInit {
 
   selectedCheckBox: boolean[] = [false, false, false, false];
   
-  selectedOptions: number[]=[3, 6];
+  
   opc1:any;
 
 
 // empiezo aca las prubeas
   selectedCheckBox2: boolean = true; 
+  selectedOptions: number[]=[3, 6];
 
   @Output()
-  selectionChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+  selectionChanged: EventEmitter<number[]> = new EventEmitter<number[]>();
 
   @Input()
   product_attributes1: AttributesValues[];
@@ -50,19 +51,19 @@ export class FiltrosAtributosComponent implements OnInit {
      
   }
 
-  attribSelectionChanged(){
-    // this.selectionDoneDef.emit(this.selectedOptions); 
+  attributesSelectionChanged(){
+ 
     console.log("PASSSSSSSAAAAAA");
-    console.log(this.selectedCheckBox2);
-    this.selectionChanged.emit(this.selectedCheckBox2); 
+    console.log(this.selectedOptions);
+    this.selectionChanged.emit(this.selectedOptions); 
   }
 
   log(x) {
-    // console.log(x);
+    console.log(x);
   }
 
   cambio(y) {
-    // console.log(y);
+    console.log(y);
   }
 
 

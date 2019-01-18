@@ -7,14 +7,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 
 
-// interface ProductResults{
-//   id: number;
-//   name: string;
-//   description: string;
-//   price: number;
-//   image: string;
-//   showed: boolean;
-// }
 
 interface CharacterizedProduct{
   product_id: number;
@@ -55,16 +47,13 @@ export class ResultsComponent implements OnInit {
   product_attributes2: AttributesValues[] = [];
   product_attributes3: AttributesValues[] = [];
   product_attributes4: AttributesValues[] = [];
-  selectedAtributtes: {type_id: number, options_id: number}[] = [];
+  // selectedAtributtes: {type_id: number, options_id: number}[] = [];
   selectedOptions: number[] = [];
   selectedAtributtes1: boolean[] = [false, false, false, false];
   children_categories: any[] = [];
 
   breadCrumb: {categId: number, categName: string}[] = [];
   qtyProductsSelectedCategory: number;
-
-
-  selectedCheckBox2: boolean = true; 
 
 
   constructor(private route: ActivatedRoute, private router:Router, private http: ApiWebcorporateService) 
@@ -78,10 +67,10 @@ ngOnInit() {
     
 
     // Simula un selectedAttributes ficticio
-    this.selectedAtributtes.push({type_id: 1, options_id: 3});
-    this.selectedAtributtes.push({type_id: 2, options_id: 4});
-    this.selectedOptions.push(3);
-    this.selectedOptions.push(4);
+    // this.selectedAtributtes.push({type_id: 1, options_id: 3});
+    // this.selectedAtributtes.push({type_id: 2, options_id: 4});
+    // this.selectedOptions.push(3);
+    // this.selectedOptions.push(4);
 
     
 
@@ -117,7 +106,7 @@ ngOnInit() {
             this.products = resp.data;
             this.products_results = [];
             for (let unProd of this.products) {
-              this.products_results.push({id: unProd.id, name:unProd.name, description:unProd.description, price: unProd.price, image: unProd.image, showed: true})
+              this.products_results.push({id: unProd.id, name:unProd.name, description:unProd.description, price: unProd.price, image: unProd.image})
               this.products_results_filtered.push(unProd.id)
             } 
       
@@ -242,16 +231,18 @@ ngOnInit() {
   }
 
 
-  seleccionaronEnHijo(valor: boolean) {
+  newSelectionReceived(valor: number[]) {
 
     console.log("PASABBBBBBBB");
+    console.log(this.products_results_filtered);
+
     console.log(typeof(valor));
-    this.selectedCheckBox2 = valor;
-    console.log(this.selectedCheckBox2);
+    this.products_results_filtered = valor;
+    console.log(this.products_results_filtered);
     
     // console.log(valor.returnValue);
     
-    this.products_results_filtered = [6, 7];
+    // this.products_results_filtered = [6, 7];
     // console.log(this.products_results_filtered);
     
 

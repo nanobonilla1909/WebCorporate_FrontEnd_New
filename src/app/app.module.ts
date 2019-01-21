@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -62,6 +62,7 @@ import { ProductResultsFilterPipe } from './components/resultspage/results/produ
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot( ROUTES, { useHash: false } )
     // RouterModule.forRoot( ROUTES, { useHash: true, enableTracing: true } )
   ],

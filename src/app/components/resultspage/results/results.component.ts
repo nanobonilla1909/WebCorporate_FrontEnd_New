@@ -31,6 +31,7 @@ interface AttributesValues{
 
 export class ResultsComponent implements OnInit {
   
+  loading: boolean;
   contador: number = 0;
   currentCategory: CategoryNode;
   selectedCategory: number;
@@ -66,6 +67,7 @@ export class ResultsComponent implements OnInit {
 ngOnInit() {
     
 
+  this.loading = true;
     // Simula un selectedAttributes ficticio
     // this.selectedAtributtes.push({type_id: 1, options_id: 3});
     // this.selectedAtributtes.push({type_id: 2, options_id: 4});
@@ -201,7 +203,8 @@ ngOnInit() {
                   }
             }  
 
-
+            this.loading = false;
+            
             // console.log(this.characterized_products_sorted);
             // console.log("product_attributes");
             // console.log(this.product_attributes);
@@ -231,19 +234,25 @@ ngOnInit() {
   }
 
 
-  newSelectionReceived(valor: number[]) {
+  newSelectionReceived(optionsSelected: number[]) {
 
     console.log("PASABBBBBBBB");
     console.log(this.products_results_filtered);
+    this.products_results_filtered=[];
+    
+    for (let unProd of this.characterized_products) {
+      if(optionsSelected.includes(unProd.options_id)){
+        // console.log("PASACCCCCC Product Id: " + unProd.product_id );
+        this.products_results_filtered.push(unProd.product_id)
+      }
+      
+    } 
 
-    console.log(typeof(valor));
-    this.products_results_filtered = valor;
+   
     console.log(this.products_results_filtered);
+    console.log("FIN DE PASABBBBBBBB");
     
-    // console.log(valor.returnValue);
-    
-    // this.products_results_filtered = [6, 7];
-    // console.log(this.products_results_filtered);
+
     
 
   }

@@ -1,75 +1,38 @@
 <br>
-<span class="busquedaFiltrosActivos">Filtro por Atributos</span>
-<br>
-
 <form [formGroup]="formulario"> 
 
-    <div id="filtros">
-        <div id="product_attributes1">
+    <span class="busquedaFiltrosActivos">Filtro por Atributos</span>
 
+    <div id="filtros">
+
+        <div *ngIf="product_attributes1.length >0" id="product_attributes1">
+            <span class="busquedaFiltrosHeader">{{ product_attributes1[0].name }}</span>
             <span class="busquedaFiltrosItem" 
               formArrayName="product_attributes1"
-              *ngFor="let item of formCheckboxes.controls; let i = index">
+              *ngFor="let item of formCheckboxesAttributes1.controls; let i = index">
               <label >
                   <input type="checkbox" [formControlName]="i" (change)="attributesSelectionChanged()"> {{ product_attributes1[i].value }}
               </label>
-            </span>
-                 
+            </span>   
         </div>  
 
         <br>
-        
-    </div>
 
-
-</form>
-
-
-<form>
-
-    <div class="busquedaFiltrosGrupo">
-        <span class="busquedaFiltrosHeader">{{ type_id_1}}</span>
-
-
-        <span class="busquedaFiltrosItem">
-            <label>
-                <input type="checkbox" [(ngModel)]="selectedCheckBox2" name="xxx" (change)="attributesSelectionChanged()"> Selected
-            </label>
-        </span>
-
-
-        <span class="busquedaFiltrosItem">
-          <label>
-              <input type="checkbox" ngModel name="a1v1" (change)="log(opc1)">  Maybeline
-          </label>
-        </span>
-
-      </div>
-
-</form>
-
-<br>
-
-<form [formGroup]="formulario"> 
-
-    <div id="filtros">
-        <!-- <div id="frameworks">
-
-            <span class="busquedaFiltrosItem" 
-              formArrayName="frameworks"
-              *ngFor="let item of formData.controls; let i = index">
-              <label >
-                  <input type="checkbox" [formControlName]="i"> {{ frameworks[i] }}
-              </label>
-            </span>
-        
-            
-        </div>   -->
-
+        <div *ngIf="product_attributes2.length >0" id="product_attributes2">
+                <span class="busquedaFiltrosHeader">{{ product_attributes2[0].name }}</span>
+                <span class="busquedaFiltrosItem" 
+                  formArrayName="product_attributes2"
+                  *ngFor="let item of formCheckboxesAttributes2.controls; let i = index">
+                  <label >
+                      <input type="checkbox" [formControlName]="i" (change)="attributesSelectionChanged()"> {{ product_attributes2[i].value }}
+                  </label>
+                </span>   
+        </div>  
+    
         <br>
+        
         <span class="busquedaFiltrosActivos">Filtro por Precio</span>
-       
-
+        
         <div id="precios" class="row">
             <div class="col-sm-6">
                 <input 
@@ -98,11 +61,12 @@
         </div>
         
     </div>
-    
+
     <br>
     <div>Informacion del Formulario</div>
     <pre>Form Valido:  {{ formulario.valid  }} </pre>
     <pre>Valores: <br> {{ formulario.value | json }} </pre>
 
 </form>
+
 

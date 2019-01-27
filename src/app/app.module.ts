@@ -17,12 +17,6 @@ import { CategoryIconsHomeComponent } from './components/homepage/category-icons
 import { ProductCardComponent } from './components/shared/product-card/product-card.component';
 import { HighlightedItemsHomeComponent } from './components/homepage/highlighted-items-home/highlighted-items-home.component';
 import { ResultsComponent } from './components/resultspage/results/results.component';
-
-// Importar Rutas
-import { ROUTES } from './app.routes';
-
-// Importar Servicios
-import { ApiWebcorporateService } from './services/api-webcorporate.service';
 import { SuscriptionsComponent } from './components/shared/suscriptions/suscriptions.component';
 import { SocialNetworksComponent } from './components/shared/social-networks/social-networks.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
@@ -32,6 +26,16 @@ import { PanelFiltrosComponent } from './components/resultspage/panel-filtros/pa
 import { FiltrosCategoriasComponent } from './components/resultspage/filtros-categorias/filtros-categorias.component';
 import { FiltrosAtributosComponent } from './components/resultspage/filtros-atributos/filtros-atributos.component';
 import { ProductResultsFilterPipe } from './components/resultspage/results/product-results-fliter.pipe';
+import { CheckoutComponent } from './components/checkoutpage/checkout/checkout.component';
+import { CartComponent } from './components/checkoutpage/cart/cart.component';
+
+
+// Importar Rutas
+import { ROUTES } from './app.routes';
+
+// Importar Servicios
+import { ApiWebcorporateService } from './services/api-webcorporate.service';
+import { CartItemsQuantity } from './services/cart-items-quantity';
 
 
   
@@ -56,7 +60,9 @@ import { ProductResultsFilterPipe } from './components/resultspage/results/produ
     PanelFiltrosComponent,
     FiltrosCategoriasComponent,
     FiltrosAtributosComponent,
-    ProductResultsFilterPipe
+    ProductResultsFilterPipe,
+    CheckoutComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +73,8 @@ import { ProductResultsFilterPipe } from './components/resultspage/results/produ
     // RouterModule.forRoot( ROUTES, { useHash: true, enableTracing: true } )
   ],
   providers: [
-    ApiWebcorporateService
+    ApiWebcorporateService,
+    CartItemsQuantity
   ],
   bootstrap: [AppComponent]
 })

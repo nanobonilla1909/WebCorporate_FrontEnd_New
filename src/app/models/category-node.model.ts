@@ -20,26 +20,4 @@ export class CategoryNode {
         this.http = http;  
     }
 
-    // prods(): Observable<number> {
-
-    //     var products: any[];
-    //     var cant:number;
-
-    //     console.log("entra por aca, categoria = ");
-    //     console.log(this.category_id);
-
-    //     this.http.getCategoryChildren(this.category_id)
-    //       .subscribe( (resp: any) => {
-            
-    //        products = resp.data;
-    //         cant = products.length;
-           
-    //     //   this.currentCategory.last_products = this.products;
-      
-    //       }); 
-
-    //       return cant;
-         
-          
-    // }
 }

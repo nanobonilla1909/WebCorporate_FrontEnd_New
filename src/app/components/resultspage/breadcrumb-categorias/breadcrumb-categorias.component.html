@@ -4,7 +4,6 @@
         <ul *ngFor="let node of breadcrumbPath;">
       
             <li class="breadcrumb-item">
-                <!-- <a href="#" id="{{ node.categName }}">/ {{ node.categName }}</a> -->
 
                 <a (click)="onClick(node.categId, node.categName)"
                     [routerLink]="['/results']" 

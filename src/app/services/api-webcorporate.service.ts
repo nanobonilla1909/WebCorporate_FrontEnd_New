@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
+
+import { CartItem } from '../models/cart-item';
+
 
 @Injectable()
 export class ApiWebcorporateService {
@@ -62,6 +65,34 @@ export class ApiWebcorporateService {
     const url = 'http://localhost:8000/api/category_children/' + product_category_id;
  
     return this.http.get(url);
+  }
+
+
+
+  // OPERACIONES CON EL CARRITO DE COMPRAS //
+  // ------------------------------------- //
+
+
+ // Agrega un Item a la Bolsa de Compras
+ // -------------------------------------
+
+  createCartItem(cart_item: CartItem) {
+
+    return this.http.post('http://localhost:8000/api/temporary_cart_items', cart_item);
+  }
+
+
+  // Obtiene la cantidad de Items de la Bolsa de Compras
+  // ----------------------------------------------------
+
+
+  getCartItemsQuantity(cart_item_id)
+  {
+
+    const url = 'http://localhost:8000/api/temporary_cart_items_quantity/' + cart_item_id;
+ 
+    return this.http.get(url);
+
   }
 
 }

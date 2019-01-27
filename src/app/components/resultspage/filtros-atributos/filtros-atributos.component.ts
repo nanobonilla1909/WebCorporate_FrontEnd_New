@@ -23,8 +23,8 @@ export class FiltrosAtributosComponent implements OnInit {
   selectedOptions2: number[];
 
   @Output()
-  selectionChanged: EventEmitter<number[]> = new EventEmitter<number[]>();
-
+  selectionChanged: EventEmitter<object> = new EventEmitter<object>();
+  
   @Input()
   product_attributes1: AttributesValues[];
 
@@ -96,9 +96,10 @@ export class FiltrosAtributosComponent implements OnInit {
       }
    }  
 
-    console.log("ESTE ES EL SELECTED OPTIONS");
+    console.log("ESTOS SON LOS SELECTED OPTIONS");
     console.log(this.selectedOptions1);
-    this.selectionChanged.emit(this.selectedOptions1); 
+    console.log(this.selectedOptions2);
+    this.selectionChanged.emit({attr1: this.selectedOptions1, attr2: this.selectedOptions2}); 
   }
 
 }

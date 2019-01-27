@@ -5,6 +5,7 @@ import { Product } from '../../../models/product.model';
 import { CategoryNode } from '../../../models/category-node.model';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
+import { CartItemsQuantity } from '../../../services/cart-items-quantity';
 
 
 
@@ -41,6 +42,7 @@ export class ResultsComponent implements OnInit {
   products: any[] = [];
   products_results: Product[] = [];
   products_results_filtered: number[] = [];
+  products_results_filtered_attr2: number[] = [];
   characterized_products: CharacterizedProduct[] = [];
   characterized_products_sorted: CharacterizedProduct[] = [];
   product_attributes: AttributesValues[] = [];
@@ -49,34 +51,31 @@ export class ResultsComponent implements OnInit {
   product_attributes3: AttributesValues[] = [];
   product_attributes4: AttributesValues[] = [];
   // selectedAtributtes: {type_id: number, options_id: number}[] = [];
-  selectedOptions: number[] = [];
+  selectedOptions1: number[] = [];
+  selectedOptions2: number[] = [];
   selectedAtributtes1: boolean[] = [false, false, false, false];
   children_categories: any[] = [];
 
   breadCrumb: {categId: number, categName: string}[] = [];
   qtyProductsSelectedCategory: number;
+  cant_items_carrito: number = 0;
 
 
-  constructor(private route: ActivatedRoute, private router:Router, private http: ApiWebcorporateService) 
-  {
+  constructor(private route: ActivatedRoute, 
+    private router:Router, 
+    private http: ApiWebcorporateService,
+    private cart_items_service: CartItemsQuantity) 
+    
+    {
 
   }
   
 
 
-ngOnInit() {
+  ngOnInit() {
     
 
-  this.loading = true;
-    // Simula un selectedAttributes ficticio
-    // this.selectedAtributtes.push({type_id: 1, options_id: 3});
-    // this.selectedAtributtes.push({type_id: 2, options_id: 4});
-    // this.selectedOptions.push(3);
-    // this.selectedOptions.push(4);
-
-    
-
-
+    this.loading = true;
 
     // Prepara el breadcrumb
     this.breadCrumb.push({categId: 0, categName: 'Inicio'});
@@ -112,6 +111,7 @@ ngOnInit() {
               this.products_results_filtered.push(unProd.id)
             } 
       
+            console.log("ESTE ME INTERESA!!!!")
             console.log(this.products_results_filtered);
             
             this.qtyProductsSelectedCategory = this.products.length;
@@ -123,6 +123,13 @@ ngOnInit() {
             this.children_categories = resp.data;
   
             }); 
+
+        this.http.getCartItemsQuantity(1)
+            .subscribe( (resp: any) => {
+            this.cant_items_carrito = resp.data[0].items_quantity;
+            this.cart_items_service.mysubject.next(this.cant_items_carrito);
+        
+        });    
 
         // Obtiene todos los atributos de los productos de la categoria elegida    
         this.http.getCategoryCharacterizedProductChildren(this.selectedCategory)
@@ -205,19 +212,6 @@ ngOnInit() {
 
             this.loading = false;
             
-            // console.log(this.characterized_products_sorted);
-            // console.log("product_attributes");
-            // console.log(this.product_attributes);
-            // console.log("product_attributes1");
-            // console.log(this.product_attributes1); 
-            // console.log("product_attributes2");
-            // console.log(this.product_attributes2);
-            // console.log("product_attributes3");
-            // console.log(this.product_attributes3); 
-            // console.log("product_attributes4");
-            // console.log(this.product_attributes4);
-            
-            
   
             }); 
 
@@ -234,26 +228,44 @@ ngOnInit() {
   }
 
 
-  newSelectionReceived(optionsSelected: number[]) {
+  newSelectionReceived(optionsSelected) {
 
+    
     console.log("PASABBBBBBBB");
-    console.log(this.products_results_filtered);
+
+
+    this.selectedOptions1 = optionsSelected.attr1;
+    this.selectedOptions2 = optionsSelected.attr2;
+
     this.products_results_filtered=[];
+    this.products_results_filtered_attr2=[];
     
     for (let unProd of this.characterized_products) {
-      if(optionsSelected.includes(unProd.options_id)){
-        // console.log("PASACCCCCC Product Id: " + unProd.product_id );
+      if(this.selectedOptions1.includes(unProd.options_id)){
         this.products_results_filtered.push(unProd.product_id)
       }
-      
     } 
 
-   
-    console.log(this.products_results_filtered);
-    console.log("FIN DE PASABBBBBBBB");
-    
+    for (let unProd of this.characterized_products) {
+      if(this.selectedOptions2.includes(unProd.options_id)){
+        this.products_results_filtered_attr2.push(unProd.product_id)
+      }
+    } 
 
+
+    // console.log("products_results_filtered_attr2: " + this.products_results_filtered_attr2);
+    // console.log("products_results_filtered: " + this.products_results_filtered);
     
+    if (this.products_results_filtered_attr2.length > 0) {
+      for(var i = 0; i < this.products_results_filtered.length; i++) {
+        if (this.products_results_filtered_attr2.includes(this.products_results_filtered[i])) {
+        } else{
+            delete this.products_results_filtered[i];
+        }
+      }
+    }
+    
+    console.log("FIN DE PASABBBBBBBB");
 
   }
 

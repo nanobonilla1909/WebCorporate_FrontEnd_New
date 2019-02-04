@@ -36,6 +36,10 @@ import { ROUTES } from './app.routes';
 // Importar Servicios
 import { ApiWebcorporateService } from './services/api-webcorporate.service';
 import { CartItemsQuantity } from './services/cart-items-quantity';
+import { CartItemComponent } from './components/checkoutpage/cart-item/cart-item.component';
+import { StepperComponent } from './components/checkoutpage/stepper/stepper.component';
+import { ShippingComponent } from './components/checkoutpage/shipping/shipping.component';
+import { PaymentComponent } from './components/checkoutpage/payment/payment.component';
 
 
   
@@ -62,7 +66,11 @@ import { CartItemsQuantity } from './services/cart-items-quantity';
     FiltrosAtributosComponent,
     ProductResultsFilterPipe,
     CheckoutComponent,
-    CartComponent
+    CartComponent,
+    CartItemComponent,
+    StepperComponent,
+    ShippingComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

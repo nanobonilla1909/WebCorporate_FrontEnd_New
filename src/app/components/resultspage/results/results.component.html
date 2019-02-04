@@ -2,8 +2,6 @@
 <app-navegacion-inferior></app-navegacion-inferior>
 <br>
 
-<!-- <app-navegacion-resultados></app-navegacion-resultados> -->
-
 
 <div class="backgroundGrisA">
     <div class="container">
@@ -25,8 +23,8 @@
             </div>
         </div>
         <div class="col-3 col-md-2 col-xl-1 pr-lg-0 columnaFlex columnaFlexRight">
-            <button class="vistaResultados vistaResultadosActiva" title="Ver grilla"><img src="assets/icos/vistaCards.svg"></button>
-            <button class="vistaResultados" title="Ver listado"><img src="assets/icos/vistaBlocks.svg"></button>
+            <button (click)="onViewTypeClick('grilla')" class="vistaResultados" [class.vistaResultadosActiva]='view_type_active_grilla' title="Ver grilla"><img src="assets/icos/vistaCards.svg"></button>
+            <button (click)="onViewTypeClick('listado')" class="vistaResultados" [class.vistaResultadosActiva]='view_type_active_listado' title="Ver listado"><img src="assets/icos/vistaBlocks.svg"></button>
         </div>
         </div>
     </div>
@@ -54,19 +52,17 @@
 
                 </div>
                 <div class="col-12 col-lg-9 columnaResultados">
-                    <!-- <div  *ngFor="let product of products_results;" class="productoItemTarjeta productoItemTarjetaBlock">                 
-                            <app-product-card [product]="product"></app-product-card>
-                    </div> -->
-                    <div  *ngFor="let product of products_results | productFilter:products_results_filtered" class="productoItemTarjeta productoItemTarjetaBlock">                 
-                            <app-product-card [product]="product"></app-product-card>
-                    </div>
+                    <div class="row">
+                            <!-- <div class="col-12 col-sm-6 col-lg-4 col-xl-3" *ngFor="let product of products_results | productFilter:products_results_filtered">                  -->
+                            <div [ngClass]="clasesColumnas" *ngFor="let product of products_results | productFilter:products_results_filtered">                 
+                                    <app-product-card 
+                                        [product]="product"
+                                        [view_type]="view_type_active">
+                                    </app-product-card>
+                            </div>
+                    </div>              
                 </div>    
         </div>
     </div>
 </div>    
 
-
-<!-- 
-<h2>{{ 'Id Categoria Seleccionada: ' + selectedCategory }}</h2>
-<h2>{{ 'Nombre Categoria Seleccionada: ' + selectedCategoryName }}</h2>
-<h2>{{ 'Search Term: ' + searchTerm }}</h2> -->

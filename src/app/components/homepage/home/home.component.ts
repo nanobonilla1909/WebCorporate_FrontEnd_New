@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
     this.http.getCartItemsQuantity(1)
     .subscribe( (resp: any) => {
       
-        this.cant_items_carrito = resp.data[0].items_quantity;
+        this.cant_items_carrito = +resp.data[0].items_quantity;
         this.loading = false;
 
         this.cart_items_service.mysubject.next(this.cant_items_carrito);

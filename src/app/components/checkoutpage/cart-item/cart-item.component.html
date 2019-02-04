@@ -1,0 +1,73 @@
+   
+<div class="col-12">
+  <div class="bolsaComprasItem bolsaComprasItemExpandidoX">
+    <div class="row">
+      <div class="col-3 col-lg-2">
+        <div class="bolsaComprasItemContenedorImagen">
+          <div class="productoEtiquetaPromo bolsaComprasEtiquetaPromo">
+            <div class="productoEtiquetaSombra"></div>
+            <img class="d-none d-xl-inline" src="assets/icos/promoEtiqueta.svg">¡5% OFF en la 2da. unidad!
+          </div>
+          <img class="bolsaComprasItemImagen" [src]="cart_item.image">
+        </div>
+      </div>
+      <div class="col-9 col-lg-10">
+        <div class="row">
+
+          <div class="col-12 col-xl-8">
+            <div class="row">
+              <div class="col-12">
+                <span class="bolsaComprasItemNombre"><a class="bolsaComprasItemTitleLink" href="#">{{ cart_item.name }}</a></span>
+              </div>
+              <div class="col-12 bolsaComprasItemDescripcion bolsaComprasItemExpandido">
+                  {{ cart_item.description }}
+              </div>
+            </div>
+
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-5 col-xl-5">
+            <a class="bolsaComprasItemLink" href="#">Eliminar</a>
+            <a class="bolsaComprasItemLink" href="#">Ver <span class="bolsaComprasItemLinkDeployTxtMas">más</span><span class="bolsaComprasItemLinkDeployTxtMenos">menos</span> <img class="bolsaComprasItemLinkDeploy" src="assets/icos/deploy.svg"></a>
+          </div>
+          <div class="col-12 col-md-7 col-xl-7 text-right">
+            <div class="row">
+              <div class="col-12">
+                <span class="modalProductoPrecioAnterior"><span class="modalProductoPrecioAnteriorTachado">{{ cart_item.price }}<span class="productoPrecioDecimal">00</span></span></span>
+              </div>
+              <div class="col-12 columnaBolsaFlex">
+                <span class="bolsaComprasPrecioUnidad">Precio por unidad:</span>
+                <span class="bolsaComprasPrecioUnidadValor">{{ cart_item.price }}<span class="productoPrecioDecimal">00</span></span>
+              </div>
+              <!-- <div class="col-12">
+                <span class="modalProductoPrecioPromo">¡5% OFF en la 2da. unidad!</span>
+              </div> -->
+              <div class="col-12">
+
+                <div class="modalProductoSelector modalProductoSelectorBolsaCompras">
+                  <span class="modalProductoSelectorCantidadTag modalProductoSelectorCantidadTagBolsaCompras d-none d-sm-block">Cantidad:</span>
+                  <span class="modalProductoSelectorCantidad modalProductoSelectorCantidadBolsaCompras">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <button (click)="addCartItem(-1)" class="btn btn-outline-secondary modalProductoSelectorCantidadBoton" type="button">-</button>
+                      </div>
+                      <!-- <input type="text" class="form-control modalProductoSelectorCantidadInput" aria-label="Cantidad a comprar" [attr.value]="cart_item.quantity"> -->
+                      <!-- <input type="text" aria-label="Cantidad a comprar" name="cart_item.quantity" [(ngModel)]="cart_item.quantity" class="form-control modalProductoSelectorCantidadInput"> -->
+                      <!-- <input type="text" aria-label="Cantidad a comprar" readonly [attr.value]="cart_item.quantity" name="cart_item.quantity"  class="form-control modalProductoSelectorCantidadInput InputNoEditable" > -->
+                      <span>{{ cart_item.quantity }}</span>
+                      <div class="input-group-append">
+                        <button (click)="addCartItem(1)" class="btn btn-outline-secondary modalProductoSelectorCantidadBoton" type="button">+</button>
+                      </div>
+                    </div>
+                  </span>
+                  <span class="modalProductoSelectorCantidadPrecioFinal modalProductoSelectorCantidadPrecioFinalBolsaCompras">{{ cart_item.price * cart_item.quantity}}<span class="productoPrecioDecimal productoPrecioDecimalBolsaCompras">00 </span></span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

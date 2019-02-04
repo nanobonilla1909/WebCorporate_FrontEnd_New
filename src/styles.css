@@ -1286,7 +1286,7 @@ a:hover,
 }
 
 .bolsaComprasItemDescripcion {
-	display:none;
+	display:block;
 	font-size:.75rem;
 	color:#555;
 	padding-bottom:.5rem;
@@ -1948,4 +1948,9 @@ a:hover,
 
 a[target=_blank] {
 	display:none;
+}
+
+
+.InputNoEditable {
+	cursor: default;
 }

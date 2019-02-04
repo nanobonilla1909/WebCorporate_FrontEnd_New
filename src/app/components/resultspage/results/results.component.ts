@@ -37,7 +37,13 @@ export class ResultsComponent implements OnInit {
   currentCategory: CategoryNode;
   selectedCategory: number;
   selectedCategoryName: string;
-  searchTerm: string; 
+  searchTerm: string;
+
+  view_type_active_grilla: boolean = false; 
+  view_type_active_listado: boolean = true; 
+  view_type_active: string = "listado";
+  clasesColumnas: string = 'col-12';
+  
 
   products: any[] = [];
   products_results: Product[] = [];
@@ -126,7 +132,7 @@ export class ResultsComponent implements OnInit {
 
         this.http.getCartItemsQuantity(1)
             .subscribe( (resp: any) => {
-            this.cant_items_carrito = resp.data[0].items_quantity;
+            this.cant_items_carrito = +resp.data[0].items_quantity;
             this.cart_items_service.mysubject.next(this.cant_items_carrito);
         
         });    
@@ -269,6 +275,23 @@ export class ResultsComponent implements OnInit {
 
   }
 
+
+  onViewTypeClick(view_type: string) {
+
+    if (view_type == 'grilla') {
+      this.view_type_active_grilla = true;
+      this.view_type_active_listado = false;
+      this.view_type_active = "grilla";
+      this.clasesColumnas = 'col-12 col-sm-6 col-lg-4 col-xl-3' 
+              
+    } else {
+      this.view_type_active_grilla = false;
+      this.view_type_active_listado = true;
+      this.view_type_active = "listado";
+      this.clasesColumnas = 'col-12'        
+
+    } 
+  }
 
   // Metodos que traen variables para otros componentes
 

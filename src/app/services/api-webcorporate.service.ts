@@ -95,4 +95,19 @@ export class ApiWebcorporateService {
 
   }
 
+
+  // Obtiene los Items de la Bolsa de Compras
+  // ----------------------------------------
+
+
+  getCartItems(cart_item_id)
+  {
+
+    const url = 'http://localhost:8000/api/temporary_carts/' + cart_item_id;
+ 
+    return this.http.get(url);
+
+  }
+
+
 }

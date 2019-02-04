@@ -1,101 +1,21 @@
+<app-stepper></app-stepper>
+
 <div class="container containerPaddingExtra">
     <div class="row">
       <div class="col">
-        <h2 class="tituloSeccionSecundario"><strong>Bolsa de compras</strong> (8 productos)</h2>
+        <h2 class="tituloSeccionSecundario"><strong>Bolsa de compras</strong> ( {{ cant_items_carrito }} productos)</h2>
       </div>
     </div>
   </div>
   
   <div class="container">
     <div class="row">
-      <!-- <?php include 'inc/bolsaComprasProducto.php';?>
-      <?php include 'inc/bolsaComprasProducto.php';?>
-      <?php include 'inc/bolsaComprasProducto.php';?>
-      <?php include 'inc/bolsaComprasProducto.php';?>
-      <?php include 'inc/bolsaComprasProducto.php';?>
-      <?php include 'inc/bolsaComprasProducto.php';?>
-      <?php include 'inc/bolsaComprasProducto.php';?>
-      <?php include 'inc/bolsaComprasProducto.php';?> -->
 
-
-
-      
-      <div class="col-12">
-          <div class="bolsaComprasItem bolsaComprasItemExpandidoX">
-            <div class="row">
-              <div class="col-3 col-lg-2">
-                <div class="bolsaComprasItemContenedorImagen">
-                  <div class="productoEtiquetaPromo bolsaComprasEtiquetaPromo">
-                    <div class="productoEtiquetaSombra"></div>
-                    <img class="d-none d-xl-inline" src="icos/promoEtiqueta.svg">¡5% OFF en la 2da. unidad!
-                  </div>
-                  <img class="bolsaComprasItemImagen" src="productos/celular.jpg">
-                </div>
-              </div>
-              <div class="col-9 col-lg-10">
-                <div class="row">
-        
-                  <div class="col-12 col-xl-8">
-                    <div class="row">
-                      <div class="col-12">
-                        <span class="bolsaComprasItemNombre"><a class="bolsaComprasItemTitleLink" href="#">Samsung Galaxy J710 Operador Movistar - Color Gris + Funda</a></span>
-                      </div>
-                      <div class="col-12 bolsaComprasItemDescripcion">
-                        Elegancia y robustez a partes iguales. Su marco metálico protegerá tu smartphone para que puedas admirar la belleza de tu Galaxy J7 por más tiempo. Disfruta de fotos lo más nítidas posible incluso en escenas oscuras, y todo gracias al rápido objetivo F1.9 de su cámara delantera y trasera. Y para que no te pierdas ningún momento, accede a la cámara haciendo doble clic en el botón de inicio. Con Galaxy J7 no tendrás perfil malo. Gracias a su LED frontal y el modo belleza, siempre saldrás perfecto. Además, con el reconocimiento de saludo podrás hacer el selfie perfecto en cuestión de segundos.
-                      </div>
-                    </div>
-                  </div>
-        
-                </div>
-                <div class="row">
-                  <div class="col-12 col-md-5 col-xl-5">
-                    <a class="bolsaComprasItemLink" href="#">Eliminar</a>
-                    <a class="bolsaComprasItemLink" href="#">Ver <span class="bolsaComprasItemLinkDeployTxtMas">más</span><span class="bolsaComprasItemLinkDeployTxtMenos">menos</span> <img class="bolsaComprasItemLinkDeploy" src="icos/deploy.svg"></a>
-                  </div>
-                  <div class="col-12 col-md-7 col-xl-7 text-right">
-                    <div class="row">
-                      <div class="col-12">
-                        <span class="modalProductoPrecioAnterior"><span class="modalProductoPrecioAnteriorTachado">$1.600<span class="productoPrecioDecimal">95</span></span></span>
-                      </div>
-                      <div class="col-12 columnaBolsaFlex">
-                        <span class="bolsaComprasPrecioUnidad">Precio por unidad:</span>
-                        <span class="bolsaComprasPrecioUnidadValor">$1.500<span class="productoPrecioDecimal">95</span></span>
-                      </div>
-                      <div class="col-12">
-                        <span class="modalProductoPrecioPromo">¡5% OFF en la 2da. unidad!</span>
-                      </div>
-                      <div class="col-12">
-        
-                        <div class="modalProductoSelector modalProductoSelectorBolsaCompras">
-                          <span class="modalProductoSelectorCantidadTag modalProductoSelectorCantidadTagBolsaCompras d-none d-sm-block">Cantidad:</span>
-                          <span class="modalProductoSelectorCantidad modalProductoSelectorCantidadBolsaCompras">
-                            <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary modalProductoSelectorCantidadBoton" type="button">-</button>
-                              </div>
-                              <input type="text" class="form-control modalProductoSelectorCantidadInput" aria-label="Cantidad a comprar" value="3">
-                              <div class="input-group-append">
-                                <button class="btn btn-outline-secondary modalProductoSelectorCantidadBoton" type="button">+</button>
-                              </div>
-                            </div>
-                          </span>
-                          <span class="modalProductoSelectorCantidadPrecioFinal modalProductoSelectorCantidadPrecioFinalBolsaCompras">$4.502<span class="productoPrecioDecimal productoPrecioDecimalBolsaCompras">85</span></span>
-                        </div>
-        
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
+      <div  *ngFor="let cart_item of cart_items;">                 
+          <app-cart-item [cart_item]="cart_item"
+            (quantityChanged)="quantityAdjusted($event)">
+          </app-cart-item>
+      </div>
 
     </div>
   </div>

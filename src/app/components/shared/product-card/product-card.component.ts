@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Product } from '../../../models/product.model';
 import { CartItem } from '../../../models/cart-item';
 import { ApiWebcorporateService } from '../../../services/api-webcorporate.service';
@@ -14,8 +14,11 @@ import { CartItemsQuantity } from '../../../services/cart-items-quantity';
 export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
+
+  @Input() view_type: string;
  
   new_cart_item: CartItem;
+  view_type_active_listado: boolean;
 
 
   constructor(private http: ApiWebcorporateService, private cart_items_service: CartItemsQuantity) { 
@@ -24,13 +27,33 @@ export class ProductCardComponent implements OnInit {
 
   ngOnInit() {
 
+    // if (this.view_type == 'listado') {
+    //   this.view_type_active_listado = true;
+    // } else {
+    //   this.view_type_active_listado = false;
+    // }  
+   
+    
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("PASA POR EL ONCHANGES!!!");
+    if (this.view_type == 'listado') {
+      this.view_type_active_listado = true;
+    } else {
+      this.view_type_active_listado = false;
+    }  
+    
+    
+  }
+
+
+
+  // Agrega Item a la bolsa
 
   addCartItem(){
 
-
     this.cart_items_service.mysubject.next(1);
-
     this.new_cart_item = new CartItem();
     this.new_cart_item.temporary_cart_id = 1;
     this.new_cart_item.product_id = this.product.id;

@@ -40,12 +40,56 @@ export class FiltrosAtributosComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log("PAS X INIT DE ATRIBUTOS");
+    
     this.formulario = this.fb.group({
       precio_desde: [],
       precio_hasta: [],
       product_attributes1: this.buildProductAttributes1(),
       product_attributes2: this.buildProductAttributes2()
     })
+  }
+
+
+  ngDoCheck(): void {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    //Add 'implements DoCheck' to the class.
+    console.log("docheck");
+    this.formulario = this.fb.group({
+      precio_desde: [],
+      precio_hasta: [],
+      product_attributes1: this.buildProductAttributes1(),
+      product_attributes2: this.buildProductAttributes2()
+    })
+
+  }
+
+  ngAfterContentInit(): void {
+    //Called after ngOnInit when the component's or directive's content has been initialized.
+    //Add 'implements AfterContentInit' to the class.
+    console.log("contentinit");
+
+  }
+
+  ngAfterContentChecked(): void {
+    //Called after every check of the component's or directive's content.
+    //Add 'implements AfterContentChecked' to the class.
+    console.log("contentchecked");
+
+  }
+
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    console.log("viewinit");
+
+  }
+
+  ngAfterViewChecked(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+    console.log("viewcheck");
+
   }
 
 
@@ -80,7 +124,6 @@ export class FiltrosAtributosComponent implements OnInit {
     this.selectedOptions1 = [];
     this.selectedOptions2 = [];
     
-    console.log("PASSSSSSSAAAAAA");
     var product_attributes1_values = this.formulario.controls.product_attributes1.value
     var product_attributes2_values = this.formulario.controls.product_attributes2.value
   
@@ -96,9 +139,9 @@ export class FiltrosAtributosComponent implements OnInit {
       }
    }  
 
-    console.log("ESTOS SON LOS SELECTED OPTIONS");
-    console.log(this.selectedOptions1);
-    console.log(this.selectedOptions2);
+    // console.log("ESTOS SON LOS SELECTED OPTIONS");
+    // console.log(this.selectedOptions1);
+    // console.log(this.selectedOptions2);
     this.selectionChanged.emit({attr1: this.selectedOptions1, attr2: this.selectedOptions2}); 
   }
 

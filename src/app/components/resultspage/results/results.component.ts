@@ -59,7 +59,7 @@ export class ResultsComponent implements OnInit {
   // selectedAtributtes: {type_id: number, options_id: number}[] = [];
   selectedOptions1: number[] = [];
   selectedOptions2: number[] = [];
-  selectedAtributtes1: boolean[] = [false, false, false, false];
+  // selectedAtributtes1: boolean[] = [false, false, false, false];
   children_categories: any[] = [];
 
   breadCrumb: {categId: number, categName: string}[] = [];
@@ -81,6 +81,8 @@ export class ResultsComponent implements OnInit {
   ngOnInit() {
     
 
+    console.log("Pasa por en Init de Results.ts")
+
     this.loading = true;
 
     // Prepara el breadcrumb
@@ -91,23 +93,46 @@ export class ResultsComponent implements OnInit {
       this.route.queryParamMap
     ]).subscribe(combined => {
 
+
+      console.log("ESTAMOS DE ACUERDO QUE PASA POR ACA???!??!?!");
       // Captura Variables de la ruta (url)
       this.selectedCategory = +combined[1].get('category_id');
       this.selectedCategoryName  = combined[1].get('category_name');
       this.searchTerm  = combined[1].get('searchTerm');
       this.currentCategory = new CategoryNode(this.selectedCategory, this.selectedCategoryName, this.http); 
 
+      console.log("this.selectedCategory: ",this.selectedCategory)
+      console.log("this.selectedCategoryName: ",this.selectedCategoryName)
       
 
       // Inicializa Variables
       this.qtyProductsSelectedCategory = 0;
 
       this.breadCrumb.push({categId: this.selectedCategory, categName: this.selectedCategoryName});
+      
+
+      this.http.getCartItemsQuantity(1)
+            .subscribe( (resp: any) => {
+            this.cant_items_carrito = +resp.data[0].items_quantity;
+            this.cart_items_service.mysubject.next(this.cant_items_carrito);
+      });    
+
 
       if (this.selectedCategory != null) {
 
         this.products_results = [];
         this.products_results_filtered = [];
+        // agregado desde aca
+        this.products_results_filtered_attr2 = [];
+        this.characterized_products = [];
+        this.characterized_products_sorted = [];
+        this.product_attributes = [];
+
+        this.selectedOptions1 = [];
+        this.selectedOptions2 = [];
+        this.children_categories = [];
+
+        // Trae Todos los Productos de la Categoria seleccionada
         this.http.getCategoryProductChildren(this.selectedCategory)
             .subscribe( (resp: any) => {
             this.products = resp.data;
@@ -117,109 +142,85 @@ export class ResultsComponent implements OnInit {
               this.products_results_filtered.push(unProd.id)
             } 
       
-            console.log("ESTE ME INTERESA!!!!")
-            console.log(this.products_results_filtered);
+            // console.log("ESTE ME INTERESA!!!!")
+            // console.log(this.products_results_filtered);
             
             this.qtyProductsSelectedCategory = this.products.length;
+
+            
+            // Trae Las SubCategorias Hijas de la Categoria seleccionada
+            this.http.getChildrenCategories(this.selectedCategory)
+              .subscribe( (resp: any) => {
+                this.children_categories = resp.data;
   
+
+                // Obtiene todos los Productos Caracterizados de la categoria elegida    
+                this.http.getCategoryCharacterizedProductChildren(this.selectedCategory)
+                    .subscribe( (resp: any) => {
+                    this.characterized_products = resp.data;
+
+                    // Ordena los registros en: this.characterized_products_sorted 
+                    this.characterized_products_sorted = this.characterized_products.sort(
+                      function(a, b) {
+                        if (a.type_id === b.type_id) {
+                          return a.options_id - b.options_id;
+                        }
+                        return a.type_id > b.type_id ? 1 : -1;
+                      }
+                    );
+            
+                    this.initialize_product_attributes_1_to_4();
+
+                    // Arma una lista unificada de Atributos y Valores (product_attributes)
+                    var type_id_ant = this.characterized_products_sorted[0].type_id;
+                    var options_id_ant = this.characterized_products_sorted[0].options_id;
+                    var name_ant = this.characterized_products_sorted[0].name;
+                    var value_ant = this.characterized_products_sorted[0].value;
+
+                    for(var i = 0; i < this.characterized_products_sorted.length; i++) {
+                      
+                      if (this.characterized_products_sorted[i].options_id != options_id_ant ||
+                        this.characterized_products_sorted[i].type_id != type_id_ant ) {
+
+                          this.product_attributes.push({type_id: type_id_ant, name: name_ant, options_id: options_id_ant, value: value_ant})
+                          type_id_ant = this.characterized_products_sorted[i].type_id;
+                          options_id_ant = this.characterized_products_sorted[i].options_id;
+                          name_ant = this.characterized_products_sorted[i].name;
+                          value_ant = this.characterized_products_sorted[i].value;
+
+                      }
+                    }
+                    this.product_attributes.push({type_id: type_id_ant, name: name_ant, options_id: options_id_ant, value: value_ant})
+                    console.log("this.product_attributes: ", this.product_attributes);
+                    // Hasta Aca trajo Todos los Productos Caracterizados, lo ordeno por id de caracteristica 
+                    // y armo una Lista unica en product_attributes.
+
+                    // type_id	name	options_id	value
+                    //  1	    Volumen	  1	       750ml
+                    //  1	    Volumen	  2	      1 Litro
+                    //  1	    Volumen	  3	      500cc
+                    //  2	    Marca	    4	      Bombay
+                    //  2	    Marca	    5	      Amarula
+                    //  2	    Marca	    6	      Baileys
+
+
+                    // Divide los Atributos en 4 listas distintas
+ 
+                    this.create_product_attributes_1_to_4();
+
+                    console.log("this.product_attributes1: ", this.product_attributes1);
+                    console.log("this.product_attributes2: ", this.product_attributes2);
+
+                    this.loading = false;
+
+
+                  }); 
+
+                // this.loading = false;
+
             }); 
   
-        this.http.getChildrenCategories(this.selectedCategory)
-            .subscribe( (resp: any) => {
-            this.children_categories = resp.data;
-  
-            }); 
-
-        this.http.getCartItemsQuantity(1)
-            .subscribe( (resp: any) => {
-            this.cant_items_carrito = +resp.data[0].items_quantity;
-            this.cart_items_service.mysubject.next(this.cant_items_carrito);
-        
-        });    
-
-        // Obtiene todos los atributos de los productos de la categoria elegida    
-        this.http.getCategoryCharacterizedProductChildren(this.selectedCategory)
-            .subscribe( (resp: any) => {
-            this.characterized_products = resp.data;
-            // Ordena los registros
-            this.characterized_products_sorted = this.characterized_products.sort(
-              function(a, b) {
-                if (a.type_id === b.type_id) {
-                  return a.options_id - b.options_id;
-                }
-                return a.type_id > b.type_id ? 1 : -1;
-              }
-            );
-     
-            
-            this.product_attributes = [];
-            this.product_attributes1 = [];
-            this.product_attributes2 = [];
-            this.product_attributes3 = [];
-            this.product_attributes4 = [];
-
-            // Arma una lista unificada de Atributos y Valores (product_attributes)
-            var type_id_ant = this.characterized_products_sorted[0].type_id;
-            var options_id_ant = this.characterized_products_sorted[0].options_id;
-            var name_ant = this.characterized_products_sorted[0].name;
-            var value_ant = this.characterized_products_sorted[0].value;
-            for(var i = 0; i < this.characterized_products_sorted.length; i++) {
-              if (this.characterized_products_sorted[i].options_id != options_id_ant ||
-                this.characterized_products_sorted[i].type_id != type_id_ant ) {
-                  this.product_attributes.push({type_id: type_id_ant, name: name_ant, options_id: options_id_ant, value: value_ant})
-                  type_id_ant = this.characterized_products_sorted[i].type_id;
-                  options_id_ant = this.characterized_products_sorted[i].options_id;
-                  name_ant = this.characterized_products_sorted[i].name;
-                  value_ant = this.characterized_products_sorted[i].value;
-              }
-            }
-            this.product_attributes.push({type_id: type_id_ant, name: name_ant, options_id: options_id_ant, value: value_ant})
-            
-
-            // Divide los Atributos en 4 listas distintas
-            var j = 0; 
-            type_id_ant = this.product_attributes[0].type_id;
-            name_ant = this.product_attributes[0].name;
-          
-            while(j < this.product_attributes.length && this.product_attributes[j].type_id == type_id_ant) {
-              this.product_attributes1.push({type_id: type_id_ant, name: name_ant, options_id: this.product_attributes[j].options_id, value: this.product_attributes[j].value})
-              j++;
-            }
-
-            if (j < this.product_attributes.length) {
-
-              type_id_ant = this.product_attributes[j].type_id;
-              name_ant = this.product_attributes[j].name;
-              while(j < this.product_attributes.length && this.product_attributes[j].type_id == type_id_ant) {
-                this.product_attributes2.push({type_id: type_id_ant, name: name_ant, options_id: this.product_attributes[j].options_id, value: this.product_attributes[j].value})
-                j++;
-              }
-            }
-
-            if (j < this.product_attributes.length) {
-
-                type_id_ant = this.product_attributes[j].type_id;
-                name_ant = this.product_attributes[j].name;
-                while(j < this.product_attributes.length && this.product_attributes[j].type_id == type_id_ant) {
-                  this.product_attributes3.push({type_id: type_id_ant, name: name_ant, options_id: this.product_attributes[j].options_id, value: this.product_attributes[j].value})
-                  j++;
-                }
-            }
-
-            if (j < this.product_attributes.length) {
-
-                  type_id_ant = this.product_attributes[j].type_id;
-                  name_ant = this.product_attributes[j].name;
-                  while(j < this.product_attributes.length && this.product_attributes[j].type_id == type_id_ant) {
-                    this.product_attributes4.push({type_id: type_id_ant, name: name_ant, options_id: this.product_attributes[j].options_id, value: this.product_attributes[j].value})
-                    j++;
-                  }
-            }  
-
-            this.loading = false;
-            
-  
-            }); 
+        }); 
 
       }
 
@@ -227,7 +228,6 @@ export class ResultsComponent implements OnInit {
     });
 
     this.route.paramMap.subscribe();
-
     this.route.queryParamMap.subscribe();
     
 
@@ -242,6 +242,13 @@ export class ResultsComponent implements OnInit {
 
     this.selectedOptions1 = optionsSelected.attr1;
     this.selectedOptions2 = optionsSelected.attr2;
+
+
+    console.log(this.selectedOptions1);
+    console.log(this.selectedOptions2);
+
+    console.log("hasta ahi ahi");
+
 
     this.products_results_filtered=[];
     this.products_results_filtered_attr2=[];
@@ -293,6 +300,60 @@ export class ResultsComponent implements OnInit {
     } 
   }
 
+
+  initialize_product_attributes_1_to_4(){
+    this.product_attributes = [];
+    this.product_attributes1 = [];
+    this.product_attributes2 = [];
+    this.product_attributes3 = [];
+    this.product_attributes4 = [];
+  }
+                   
+
+  create_product_attributes_1_to_4(){
+
+    var j = 0; 
+    var type_id_ant = this.product_attributes[0].type_id;
+    var name_ant = this.product_attributes[0].name;
+  
+    while(j < this.product_attributes.length && this.product_attributes[j].type_id == type_id_ant) {
+      this.product_attributes1.push({type_id: type_id_ant, name: name_ant, options_id: this.product_attributes[j].options_id, value: this.product_attributes[j].value})
+      j++;
+    }
+
+    if (j < this.product_attributes.length) {
+
+      type_id_ant = this.product_attributes[j].type_id;
+      name_ant = this.product_attributes[j].name;
+      while(j < this.product_attributes.length && this.product_attributes[j].type_id == type_id_ant) {
+        this.product_attributes2.push({type_id: type_id_ant, name: name_ant, options_id: this.product_attributes[j].options_id, value: this.product_attributes[j].value})
+        j++;
+      }
+    }
+
+    if (j < this.product_attributes.length) {
+
+        type_id_ant = this.product_attributes[j].type_id;
+        name_ant = this.product_attributes[j].name;
+        while(j < this.product_attributes.length && this.product_attributes[j].type_id == type_id_ant) {
+          this.product_attributes3.push({type_id: type_id_ant, name: name_ant, options_id: this.product_attributes[j].options_id, value: this.product_attributes[j].value})
+          j++;
+        }
+    }
+
+    if (j < this.product_attributes.length) {
+
+          type_id_ant = this.product_attributes[j].type_id;
+          name_ant = this.product_attributes[j].name;
+          while(j < this.product_attributes.length && this.product_attributes[j].type_id == type_id_ant) {
+            this.product_attributes4.push({type_id: type_id_ant, name: name_ant, options_id: this.product_attributes[j].options_id, value: this.product_attributes[j].value})
+            j++;
+          }
+    }
+
+  }
+
+        
   // Metodos que traen variables para otros componentes
 
   getbreadcrumbPath() : object[] {

@@ -27,17 +27,11 @@ export class ProductCardComponent implements OnInit {
 
   ngOnInit() {
 
-    // if (this.view_type == 'listado') {
-    //   this.view_type_active_listado = true;
-    // } else {
-    //   this.view_type_active_listado = false;
-    // }  
-   
     
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("PASA POR EL ONCHANGES!!!");
+    
     if (this.view_type == 'listado') {
       this.view_type_active_listado = true;
     } else {

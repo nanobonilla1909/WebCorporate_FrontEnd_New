@@ -1,7 +1,7 @@
 export class CartItemDisplay {
 
     id: number;
-    temporary_cart_id: number;
+    cart_id: number;
     product_id: number;
     name: string;
     description: string;

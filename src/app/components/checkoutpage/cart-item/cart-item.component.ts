@@ -35,7 +35,7 @@ export class CartItemComponent implements OnInit {
     this.cart_items_service.mysubject.next(quantity);
 
     this.new_cart_item = new CartItem();
-    this.new_cart_item.temporary_cart_id = 1;
+    this.new_cart_item.cart_id = 1;
     this.new_cart_item.product_id = this.cart_item.product_id;
     this.new_cart_item.price = this.cart_item.price;
     this.new_cart_item.quantity = quantity;

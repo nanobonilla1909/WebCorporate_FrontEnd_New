@@ -1,7 +1,7 @@
 export class CartItem {
 
     id: number;
-    temporary_cart_id: number;
+    cart_id: number;
     product_id: number;
     quantity: number;
     price: number;

@@ -2,6 +2,15 @@
 
 <app-navegacion-inferior></app-navegacion-inferior>
 
+<app-stepper
+    [step]="current_step">
+</app-stepper>
+        
+
+    
+
 <app-cart *ngIf="bag_is_active"></app-cart>
 
 <app-shipping *ngIf="shipping_is_active"></app-shipping>
+
+<app-payment *ngIf="payment_is_active"></app-payment>

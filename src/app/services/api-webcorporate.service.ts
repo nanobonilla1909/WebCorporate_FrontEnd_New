@@ -78,7 +78,7 @@ export class ApiWebcorporateService {
 
   createCartItem(cart_item: CartItem) {
 
-    return this.http.post('http://localhost:8000/api/temporary_cart_items', cart_item);
+    return this.http.post('http://localhost:8000/api/cart_items', cart_item);
   }
 
 
@@ -89,7 +89,7 @@ export class ApiWebcorporateService {
   getCartItemsQuantity(cart_item_id)
   {
 
-    const url = 'http://localhost:8000/api/temporary_cart_items_quantity/' + cart_item_id;
+    const url = 'http://localhost:8000/api/cart_items_quantity/' + cart_item_id;
  
     return this.http.get(url);
 
@@ -103,11 +103,22 @@ export class ApiWebcorporateService {
   getCartItems(cart_item_id)
   {
 
-    const url = 'http://localhost:8000/api/temporary_carts/' + cart_item_id;
+    const url = 'http://localhost:8000/api/carts/' + cart_item_id;
  
     return this.http.get(url);
 
   }
 
+
+  // Obtiene los Datos del Usuario
+  // -----------------------------
+
+  getUserDeliveryInformation(user) {
+
+    const url = 'http://localhost:8000/api/users/' + user + '/deliveries';
+ 
+    return this.http.get(url);
+
+  }
 
 }

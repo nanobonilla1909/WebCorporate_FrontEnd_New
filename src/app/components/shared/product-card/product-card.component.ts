@@ -49,7 +49,7 @@ export class ProductCardComponent implements OnInit {
 
     this.cart_items_service.mysubject.next(1);
     this.new_cart_item = new CartItem();
-    this.new_cart_item.temporary_cart_id = 1;
+    this.new_cart_item.cart_id = 1;
     this.new_cart_item.product_id = this.product.id;
     this.new_cart_item.price = this.product.price;
     this.new_cart_item.quantity = 1;

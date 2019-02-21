@@ -8,12 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
 export class StepperComponent implements OnInit {
 
 
-  @Input() step: string;
+  @Input() step: number;
 
 
   constructor() { }
 
   ngOnInit() {
+
+    console.log('this.step: ', this.step)
   }
 
 }

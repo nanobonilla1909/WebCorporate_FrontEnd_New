@@ -18,10 +18,6 @@ a:hover,
 	text-decoration: none;
 }
 
-.cursorPointer {
-	cursor:pointer;
-}
-
 .list-group-item.active {
 	background-color:inherit;
 	border:solid 1px #FF5200 !important;
@@ -34,7 +30,8 @@ a:hover,
 }
 
 .tituloSeccion {
-	font-family:Roboto-Light, "Arial", sans-serif;
+	/*font-weight:300;*/
+		font-family:Roboto-Light, "Arial", sans-serif;
 	font-size:1.5rem;
 }
 
@@ -86,7 +83,8 @@ a:hover,
 
 .notaCuotas {
 	font-size:1.4rem;
-	font-family:Roboto-Light, "Arial", sans-serif;
+	/*font-weight:300;*/
+		font-family:Roboto-Light, "Arial", sans-serif;
 }
 
 .containerPaddingExtra {
@@ -698,6 +696,7 @@ a:hover,
 	outline:none;
 }
 
+
 .productoItemTarjeta,
 .productoItemTarjeta:hover,
 .productoItemTarjeta:focus,
@@ -772,8 +771,9 @@ a:hover,
 }
 
 .busquedaCantResultados {
+	/*font-weight:300;*/
 	margin-bottom:1rem;
-	font-family:Roboto-Light, "Arial", sans-serif;
+		font-family:Roboto-Light, "Arial", sans-serif;
 }
 
 .busquedaFiltrosActivos {
@@ -832,7 +832,8 @@ a:hover,
 }
 
 .busquedaFiltrosItemCantidad {
-	font-family:Roboto-Light, "Arial", sans-serif;
+	/*font-weight:300;*/
+		font-family:Roboto-Light, "Arial", sans-serif;
 	opacity:.7;
 }
 
@@ -922,7 +923,8 @@ a:hover,
 	overflow-y:auto;
 	margin-top:.5rem;
 	padding:0 1.5rem 0 0;
-	font-family:Roboto-Light, "Arial", sans-serif;
+	/*font-weight:300;*/
+		font-family:Roboto-Light, "Arial", sans-serif;
 }
 
 .modalProductoPrecioAnterior,
@@ -933,7 +935,8 @@ a:hover,
 }
 
 .modalProductoPrecioAnterior {
-	font-family:Roboto-Light, "Arial", sans-serif;
+	/*font-weight:300;*/
+		font-family:Roboto-Light, "Arial", sans-serif;
 	color:#bbb;
 	font-size:.9rem;
 }
@@ -955,7 +958,8 @@ a:hover,
 .modalProductoPrecioActual {
 	font-size:2rem;
 	margin:0 .70rem;
-	font-family:Roboto-Light, "Arial", sans-serif;
+	/*font-weight:300;*/
+		font-family:Roboto-Light, "Arial", sans-serif;
 }
 
 .modalProductoPrecioPromo {
@@ -969,7 +973,8 @@ a:hover,
 }
 
 .modalProductoTag {
-	font-family:Roboto-Light, "Arial", sans-serif;
+	/*font-weight:300;*/
+		font-family:Roboto-Light, "Arial", sans-serif;
 }
 
 .modalProductoTag img {
@@ -1013,7 +1018,8 @@ a:hover,
 
 .modalProductoSelectorCantidadPrecioFinal {
 	font-size:2rem;
-	font-family:Roboto-Light, "Arial", sans-serif;
+	/*font-weight:300;*/
+		font-family:Roboto-Light, "Arial", sans-serif;
 }
 
 .margenInferior {
@@ -1116,7 +1122,8 @@ a:hover,
 	content: "\f040";
 }
 .md-stepper-horizontal .md-step .md-step-title {
-	margin-top:10px;
+	/*margin-top:16px;*/
+		margin-top:10px;
 	font-size:16px;
 	font-weight:600;
 }
@@ -1296,7 +1303,7 @@ a:hover,
 }
 
 .bolsaComprasItemDescripcion {
-	display:none;
+	display:block;
 	font-size:.75rem;
 	color:#555;
 	padding-bottom:.5rem;
@@ -1313,7 +1320,8 @@ a:hover,
 }
 
 .bolsaComprasPrecioUnidad {
-	font-family:Roboto-Light, "Arial", sans-serif;
+	/*font-weight:300;*/
+		font-family:Roboto-Light, "Arial", sans-serif;
 	margin-right:.5rem;
 	font-size:.75rem;
 }
@@ -1368,58 +1376,6 @@ a:hover,
 .columnaFlexResultados {
 	padding-top:0;
 	padding-bottom:0;
-}
-
-.bolsaComprasDeploy {
-	width:1.15rem;
-	transition:transform .25s ease-in-out;
-	filter:brightness(1.25) saturate(0);
-}
-
-#listadoBancos [data-toggle="collapse"] .bolsaComprasDeploy {   
-	transform:rotate(0deg);
-}
-
-#listadoBancos [data-toggle="collapse"].collapsed .bolsaComprasDeploy {
-	transform:rotate(-90deg);
-}
-
-#listadoBancos [data-toggle="collapse"]:not(.collapsed) {
-	background-color:inherit;
-	border:solid 1px #FF5200 !important;
-	border-left-width:10px !important;
-	color:inherit;
-}
-
-#listadoBancos [data-toggle="collapse"]:not(.collapsed) .bolsaComprasDeploy {
-	filter:saturate(1);
-}
-
-.list-group-item-title {
-	background-color:rgba(0,0,0,.035);
-}
-
-.seleccionarTarjetaLogoBanco img {
-	width:100%;
-	height:auto;
-}
-
-.seleccionarTarjetaLogoBanco {
-	background:white;
-	float:right;
-	height:100%;
-	position:absolute;
-	right:0;
-	top:0;
-	padding:1rem;
-	padding-top:.65rem;
-	border-left:1px solid rgba(0,0,0,.125);
-	width:7rem;
-	text-align:center;
-}
-
-.active .seleccionarTarjetaLogoBanco {
-	border-color:#FF5200;
 }
 
 /*final BOLSA DE COMPRAS*/
@@ -2009,4 +1965,9 @@ a:hover,
 
 a[target=_blank] {
 	display:none;
+}
+
+
+.InputNoEditable {
+	cursor: default;
 }

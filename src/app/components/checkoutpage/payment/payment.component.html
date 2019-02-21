@@ -1,3 +1,147 @@
-<p>
-  payment works!
-</p>
+<form> 
+
+  <div class="container containerPaddingExtra">
+    <div class="row">
+      <div class="col">
+        <h2 class="tituloSeccionSecundario"><strong>Pago</strong></h2>
+        <h6 class="mt-2">¡Último Paso! Seleccioná medios de pago.</h6>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-8">
+
+          <div class="row mb-5">
+              <div class="col">
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-title">
+                    <strong>Seleccioná tu tarjeta de crédito</strong>
+                  </li>
+                  <li *ngFor="let payment_option of payment_options;" (click)="paymentOptionSelected(payment_option.payment_method_id)" class="list-group-item list-group-item-action cursorPointer" [class.active]='payment_option.is_active'>
+                      {{ payment_option.name }}
+                      <span class="seleccionarTarjetaLogoBanco"><img src="assets/img/tarjetas/visa.jpg"></span>
+                    </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="row mb-5">
+              <div class="col" id="listadoBancos">
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-title">
+                    <strong>Seleccioná Banco y cuotas</strong>
+                  </li>
+            
+                      <div *ngFor="let bank of banks; let i=index;">
+                          <li class="collapsed list-group-item d-flex justify-content-between align-items-center cursorPointer" data-toggle="collapse"  [attr.data-target]='bank.bank_key2' role="button" aria-expanded="false" aria-controls="collapseExample">
+                              <span>{{ bank.bank_name }} <small class="form-text d-inline ml-1">({{ bank.bank_comments }})</small></span>
+                              <img class="bolsaComprasDeploy" src="assets/icos/deploy.svg">
+                            </li>
+                            <div class="collapse" [id]='bank.bank_key'  data-parent="#listadoBancos">
+                              <li class="list-group-item p-2 rounded-0">
+                                <div class="list-group-flush">
+                                  <button (click)="bankBenefitSelected(linea.bank_benefit_id)"   *ngFor="let linea of bank.bank_benefits;" type="button" class="p-2 pl-5 list-group-item list-group-item-action cursorPointer" [class.active]='linea.is_active'><small>{{ linea.description }}</small></button>
+                                </div>
+                              </li>
+                            </div>
+                      </div>
+            
+                </ul>
+              </div>
+            </div>
+            
+            <div class="row mb-5">
+              <div class="col">
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-title">
+                    <strong>Ingresá los datos de tu tarjeta</strong>
+                  </li>
+                  <li class="list-group-item">
+
+
+                      <div class="form-group">
+                          <label for="numeroTarjeta"><small>Número de tarjeta</small></label>
+                          <input type="text" class="form-control form-control-sm" id="numeroTarjeta" placeholder="Ingresar número de tarjeta">
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="codigoSeguridad"><small>Código de seguridad</small></label>
+                            <input type="text" class="form-control form-control-sm" id="codigoSeguridad4" placeholder="Ingresar código de seguridad">
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="fechaVencimiento"><small>Vencimiento</small></label>
+                            <input type="text" class="form-control form-control-sm" id="fechaVencimiento" placeholder="Ingresar fecha de vencimiento">
+                          </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="tipoDocumento"><small>Tipo de documento</small></label>
+                            <select id="tipoDocumento" class="form-control form-control-sm">
+                              <option selected>DNI</option>
+                              <option>LC</option>
+                              <option>LE</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label for="numeroDocumento"><small>Número de documento</small></label>
+                            <input type="text" class="form-control form-control-sm" id="numeroDocumento">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="politicaSeguridadCheck">
+                            <label class="form-check-label" for="politicaSeguridadCheck">
+                              <small>He leído y acepto las Condiciones de Compra y la Política de Seguridad.</small>
+                            </label>
+                          </div>
+                        </div>
+
+
+                  </li>
+                </ul>
+              </div>
+            </div>
+      
+      
+      
+      </div>
+      <div class="col-12 col-lg-4">
+        
+          <div class="row">
+              <div class="col">
+                <ul class="list-group mb-3">
+                  <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-title">
+                    <strong>Resumen de compra</strong>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Productos ({{ cant_items_carrito }})
+                    <span>${{ total_amount_cart}}</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Envío
+                    <span>Gratis</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <strong>Total</strong>
+                    <span><strong>${{ total_amount_cart}}</strong></span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+
+      </div>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col text-right">
+        <button type="button" class="btn btn-lg botonFullWidthMobile btn-institucional margenInferior">Pagar</button>
+      </div>
+    </div>
+  </div>
+
+</form>

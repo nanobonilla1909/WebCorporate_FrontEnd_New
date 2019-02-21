@@ -1,7 +1,8 @@
 
+
 <div class="md-stepper-horizontal orange">
 
-    <div class="md-step active md-step-completado">
+    <div class="md-step" [class.active]="step==1">
       <a [routerLink]="['/checkout-bag']" >
         <div class="md-step-circle">
           <span>
@@ -16,7 +17,7 @@
       </a>
     </div>
   
-    <div class="md-step active md-step-completadoX">
+    <div class="md-step" [class.active]="step==2">
       <a [routerLink]="['/checkout-shipping']">
         <div class="md-step-circle">
           <span>
@@ -31,7 +32,7 @@
       </a>
     </div>
   
-    <div class="md-step active md-step-completadoX">
+    <div class="md-step" [class.active]="step==3">
       <a [routerLink]="['/checkout-payment']">
         <div class="md-step-circle">
           <span>

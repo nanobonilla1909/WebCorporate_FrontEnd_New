@@ -278,8 +278,6 @@ export class ResultsComponent implements OnInit {
       }
     }
     
-    console.log("FIN DE PASABBBBBBBB");
-
   }
 
 

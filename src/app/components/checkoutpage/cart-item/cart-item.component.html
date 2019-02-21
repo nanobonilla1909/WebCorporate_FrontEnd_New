@@ -4,10 +4,10 @@
     <div class="row">
       <div class="col-3 col-lg-2">
         <div class="bolsaComprasItemContenedorImagen">
-          <div class="productoEtiquetaPromo bolsaComprasEtiquetaPromo">
+          <!-- <div class="productoEtiquetaPromo bolsaComprasEtiquetaPromo">
             <div class="productoEtiquetaSombra"></div>
             <img class="d-none d-xl-inline" src="assets/icos/promoEtiqueta.svg">¡5% OFF en la 2da. unidad!
-          </div>
+          </div> -->
           <img class="bolsaComprasItemImagen" [src]="cart_item.image">
         </div>
       </div>
@@ -37,7 +37,7 @@
               </div>
               <div class="col-12 columnaBolsaFlex">
                 <span class="bolsaComprasPrecioUnidad">Precio por unidad:</span>
-                <span class="bolsaComprasPrecioUnidadValor">{{ cart_item.price }}<span class="productoPrecioDecimal">00</span></span>
+                <span class="bolsaComprasPrecioUnidadValor">{{ cart_item.price - cart_item.discount_amount }}<span class="productoPrecioDecimal">00</span></span>
               </div>
               <!-- <div class="col-12">
                 <span class="modalProductoPrecioPromo">¡5% OFF en la 2da. unidad!</span>
@@ -60,7 +60,7 @@
                       </div>
                     </div>
                   </span>
-                  <span class="modalProductoSelectorCantidadPrecioFinal modalProductoSelectorCantidadPrecioFinalBolsaCompras">{{ cart_item.price * cart_item.quantity}}<span class="productoPrecioDecimal productoPrecioDecimalBolsaCompras">00 </span></span>
+                  <span class="modalProductoSelectorCantidadPrecioFinal modalProductoSelectorCantidadPrecioFinalBolsaCompras">{{ (cart_item.price - cart_item.discount_amount) * cart_item.quantity}}<span class="productoPrecioDecimal productoPrecioDecimalBolsaCompras">00 </span></span>
                 </div>
 
               </div>

@@ -121,4 +121,15 @@ export class ApiWebcorporateService {
 
   }
 
+  // Obtiene los Datos de Pagos
+  // -----------------------------
+
+  getPaymentOptions() {
+
+    const url = 'http://localhost:8000/api/payment_options';
+ 
+    return this.http.get(url);
+
+  }
+
 }

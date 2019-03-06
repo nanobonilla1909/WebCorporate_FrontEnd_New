@@ -18,8 +18,6 @@ export class NavegacionSuperiorComponent implements OnInit {
 
     this.cart_items_service.mysubject.subscribe( (value) => {
       this.cant_items_bolsa = this.cant_items_bolsa + value;
-      // console.log("this.cant_items_bolsa: ", this.cant_items_bolsa);
-      // console.log("typeof: ", typeof(this.cant_items_bolsa));
     
       
       });

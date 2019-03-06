@@ -40,6 +40,7 @@ import { CartItemComponent } from './components/checkoutpage/cart-item/cart-item
 import { StepperComponent } from './components/checkoutpage/stepper/stepper.component';
 import { ShippingComponent } from './components/checkoutpage/shipping/shipping.component';
 import { PaymentComponent } from './components/checkoutpage/payment/payment.component';
+import { ProductDetailComponent } from './components/shared/product-detail/product-detail.component';
 
 
   
@@ -70,7 +71,8 @@ import { PaymentComponent } from './components/checkoutpage/payment/payment.comp
     CartItemComponent,
     StepperComponent,
     ShippingComponent,
-    PaymentComponent
+    PaymentComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

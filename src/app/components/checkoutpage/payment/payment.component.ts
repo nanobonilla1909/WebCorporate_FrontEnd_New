@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ApiWebcorporateService } from '../../../services/api-webcorporate.service';
 import { CartItemsQuantity } from '../../../services/cart-items-quantity';
+import { CartItemDisplay } from '../../../models/cart-item-display';
 
 interface PaymentOption{
   payment_method_id: number;
@@ -40,79 +41,61 @@ export class PaymentComponent implements OnInit {
 
   // formulario: FormGroup;
   payment_options: PaymentOption[]=[];
+  new_payment_options: PaymentOption[]=[];
   payment_option_selected: number = 1;
   banks: Bank[]=[];
 
   total_amount_cart: number;
   cant_items_carrito: number;
+  cart_items: CartItemDisplay[] = [];
+  total_amount_price: number;
+  total_amount_discount: number;
+  subtotal_amount_cart: number;
+  loading: boolean;
 
 
   constructor(private http: ApiWebcorporateService, private cart_items_service: CartItemsQuantity) { }
 
   ngOnInit() {
 
-    this.payment_options.push(
-      {
-        payment_method_id: 1,
-        is_active: false,
-        name: "Visa",
-        banks: [
-          {
-            bank_id: 2,
-            bank_name: "Banco Frances",
-            bank_benefits: [
-              {
-                bank_benefit_id: 2,
-                quotes: 6,
-                interest: 0
-              },
-              {
-                bank_benefit_id: 3,
-                quotes: 9,
-                interest: 0
-              },
-              {
-                bank_benefit_id: 4,
-                quotes: 12,
-                interest: 0
-              }
-            ]
-          },
-          {
-            bank_id: 1,
-            bank_name: "Banco Nacion",
-            bank_benefits: [
-              {
-                bank_benefit_id: 1,
-                quotes: 6,
-                interest: 0
-              }
-            ]
-          }
-        ]
+    
+
+    this.loading = true;
+
+    this.http.getPaymentOptions()
+    .subscribe( (resp: any) => {
+        this.new_payment_options = resp;
+    
+          this.payment_options = this.new_payment_options
+          console.log("payment_options: ", this.payment_options);
+          this.loading = true;
+    
+          this.http.getCartItems(1)
+          .subscribe( (resp: any) => {
       
-      },
-      {
-        payment_method_id: 2,
-        is_active: false,
-        name: "Mastercard",
-        banks: [
-          {
-            bank_id: 3,
-            bank_name: "Banco Provincia",
-            bank_benefits: [
-              {
-                bank_benefit_id: 5,
-                quotes: 6,
-                interest: 15
+              this.cart_items = resp.data;
+              
+              this.subtotal_amount_cart = 0;
+              this.total_amount_discount = 0;
+              for (let item of this.cart_items) {
+                this.subtotal_amount_cart = this.subtotal_amount_cart + (item['price'] * item['quantity']);
+                this.total_amount_discount = this.total_amount_discount + (item['discount_amount'] * item['quantity']);
               }
-            ]
-          }
-        ]
-      }
-      
-      );
-   
+              this.total_amount_cart = this.subtotal_amount_cart - this.total_amount_discount;
+            
+              this.http.getCartItemsQuantity(1)
+                .subscribe( (resp: any) => {
+            
+                    this.cant_items_carrito = +resp.data[0].items_quantity;
+                    this.loading = false;
+    
+                    this.cart_items_service.mysubject.next(this.cant_items_carrito);
+    
+                });
+    
+          });
+
+    });
 
   }
 
@@ -174,15 +157,71 @@ export class PaymentComponent implements OnInit {
         }
       }
 
-
-
-      
-
-
-
-
     }
   } 
     
+  // Simulado por si no funciona la api
+  //------------------------------------
+  // this.payment_options.push(
+  //   {
+  //     payment_method_id: 1,
+  //     is_active: false,
+  //     name: "Visa",
+  //     banks: [
+  //       {
+  //         bank_id: 2,
+  //         bank_name: "Banco Frances",
+  //         bank_benefits: [
+  //           {
+  //             bank_benefit_id: 2,
+  //             quotes: 6,
+  //             interest: 0
+  //           },
+  //           {
+  //             bank_benefit_id: 3,
+  //             quotes: 9,
+  //             interest: 0
+  //           },
+  //           {
+  //             bank_benefit_id: 4,
+  //             quotes: 12,
+  //             interest: 0
+  //           }
+  //         ]
+  //       },
+  //       {
+  //         bank_id: 1,
+  //         bank_name: "Banco Nacion",
+  //         bank_benefits: [
+  //           {
+  //             bank_benefit_id: 1,
+  //             quotes: 6,
+  //             interest: 0
+  //           }
+  //         ]
+  //       }
+  //     ]
+    
+  //   },
+  //   {
+  //     payment_method_id: 2,
+  //     is_active: false,
+  //     name: "Mastercard",
+  //     banks: [
+  //       {
+  //         bank_id: 3,
+  //         bank_name: "Banco Provincia",
+  //         bank_benefits: [
+  //           {
+  //             bank_benefit_id: 5,
+  //             quotes: 6,
+  //             interest: 15
+  //           }
+  //         ]
+  //       }
+  //     ]
+  //   }
+    
+  //   );
 
 }

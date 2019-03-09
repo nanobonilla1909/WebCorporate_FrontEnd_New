@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 import { CartItem } from '../models/cart-item';
+import { Order } from '../models/order.model';
 
 
 @Injectable()
@@ -131,5 +132,15 @@ export class ApiWebcorporateService {
     return this.http.get(url);
 
   }
+
+
+  // Crea una Orden de Venta
+ // ------------------------
+
+ createOrder(new_order: Order) {
+
+  return this.http.post('http://localhost:8000/api/orders', new_order);
+}
+
 
 }

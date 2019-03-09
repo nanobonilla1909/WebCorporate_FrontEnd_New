@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
@@ -42,8 +43,11 @@ import { ShippingComponent } from './components/checkoutpage/shipping/shipping.c
 import { PaymentComponent } from './components/checkoutpage/payment/payment.component';
 import { ProductDetailComponent } from './components/shared/product-detail/product-detail.component';
 
+// Modulos de Angular Material
+import { MatDialogModule } from '@angular/material/dialog';
+ 
 
-  
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,11 +80,16 @@ import { ProductDetailComponent } from './components/shared/product-detail/produ
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot( ROUTES, { useHash: false } )
+    RouterModule.forRoot( ROUTES, { useHash: false } ),
+    MatDialogModule
     // RouterModule.forRoot( ROUTES, { useHash: true, enableTracing: true } )
+  ],
+  entryComponents: [
+    ProductDetailComponent
   ],
   providers: [
     ApiWebcorporateService,

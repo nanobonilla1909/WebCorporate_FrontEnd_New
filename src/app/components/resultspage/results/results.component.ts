@@ -287,7 +287,7 @@ export class ResultsComponent implements OnInit {
       this.view_type_active_grilla = true;
       this.view_type_active_listado = false;
       this.view_type_active = "grilla";
-      this.clasesColumnas = 'col-12 col-sm-6 col-lg-4 col-xl-3' 
+      this.clasesColumnas = 'col-12 col-sm-6 col-lg-4 col-xl-4' 
               
     } else {
       this.view_type_active_grilla = false;

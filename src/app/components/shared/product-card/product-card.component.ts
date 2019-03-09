@@ -3,6 +3,8 @@ import { Product } from '../../../models/product.model';
 import { CartItem } from '../../../models/cart-item';
 import { ApiWebcorporateService } from '../../../services/api-webcorporate.service';
 import { CartItemsQuantity } from '../../../services/cart-items-quantity';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductDetailComponent } from '../product-detail/product-detail.component';
 
 @Component({
   selector: 'app-product-card',
@@ -20,8 +22,10 @@ export class ProductCardComponent implements OnInit {
   new_cart_item: CartItem;
   view_type_active_listado: boolean;
 
+  resultado: string;
 
-  constructor(private http: ApiWebcorporateService, private cart_items_service: CartItemsQuantity) { 
+
+  constructor(private http: ApiWebcorporateService, private cart_items_service: CartItemsQuantity, public dialog: MatDialog) { 
 
   }
 
@@ -63,8 +67,21 @@ export class ProductCardComponent implements OnInit {
 
 
 
-      });
-          
+      });  
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ProductDetailComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.resultado = result;
+    });
+    console.log("DIALOOOOOGGGGGGG");
+    
+
   }
 
 }

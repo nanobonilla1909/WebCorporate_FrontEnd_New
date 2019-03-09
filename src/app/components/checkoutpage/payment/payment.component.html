@@ -125,7 +125,7 @@
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     <strong>Total</strong>
-                    <span><strong>${{ total_amount_cart}}</strong></span>
+                    <span><strong>${{ total_amount_cart }}</strong></span>
                   </li>
                 </ul>
               </div>
@@ -139,7 +139,13 @@
   <div class="container">
     <div class="row">
       <div class="col text-right">
-        <button type="button" class="btn btn-lg botonFullWidthMobile btn-institucional margenInferior">Pagar</button>
+        <button 
+            *ngIf="cant_items_carrito"
+            (click)="saveOrder()" 
+            type="button" 
+            class="btn btn-lg botonFullWidthMobile btn-institucional margenInferior">
+                Confirmar Compra
+        </button>
       </div>
     </div>
   </div>

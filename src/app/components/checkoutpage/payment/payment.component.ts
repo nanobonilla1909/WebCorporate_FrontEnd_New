@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { ApiWebcorporateService } from '../../../services/api-webcorporate.service';
 import { CartItemsQuantity } from '../../../services/cart-items-quantity';
 import { CartItemDisplay } from '../../../models/cart-item-display';
+import { Order } from '../../../models/order.model';
 
 interface PaymentOption{
   payment_method_id: number;
@@ -22,6 +23,8 @@ interface Bank{
 
 interface BankBenefit{
   bank_benefit_id: number;
+  bank_id?: number;
+  payment_method_id?: number;
   quotes: number;
   interest: number;
   description?: string;
@@ -44,6 +47,7 @@ export class PaymentComponent implements OnInit {
   new_payment_options: PaymentOption[]=[];
   payment_option_selected: number = 1;
   banks: Bank[]=[];
+  selected_bank_benefit: BankBenefit;
 
   total_amount_cart: number;
   cant_items_carrito: number;
@@ -67,8 +71,6 @@ export class PaymentComponent implements OnInit {
         this.new_payment_options = resp;
     
           this.payment_options = this.new_payment_options
-          console.log("payment_options: ", this.payment_options);
-          this.loading = true;
     
           this.http.getCartItems(1)
           .subscribe( (resp: any) => {
@@ -87,6 +89,7 @@ export class PaymentComponent implements OnInit {
                 .subscribe( (resp: any) => {
             
                     this.cant_items_carrito = +resp.data[0].items_quantity;
+
                     this.loading = false;
     
                     this.cart_items_service.mysubject.next(this.cant_items_carrito);
@@ -145,6 +148,7 @@ export class PaymentComponent implements OnInit {
     
   bankBenefitSelected(selected_bank_benefit){
     console.log('bank_benefit_id', selected_bank_benefit);
+    // this.selected_bank_benefit.bank_benefit_id =
 
     for (let pmt_op of this.payment_options) {
       for (let bank of pmt_op.banks) {
@@ -159,7 +163,38 @@ export class PaymentComponent implements OnInit {
 
     }
   } 
+
+  saveOrder() {
+
+    var new_order = new Order();
+
+    new_order.order_number = 50505;
+    new_order.order_type_id = 1;
+    new_order.customer_id = 1;
+    new_order.payment_method_id = 1;
+    // new_order.quotes = ;
+    // new_order.bank_id = ;
+    // new_order.token = ;
+    // new_order.total = ;
+    // new_order.order_status_id = ;
+    // new_order.delivery_id = ;
+    // new_order.code_auth = ;
+    // new_order.site_transaction_id = ;
+    // new_order.card = ;
+    // new_order.card_number = ;
+    // new_order.ticket = ;
+    // new_order.number_operation = ;
+    // new_order.comments = ;
+    // new_order.is_for_gift = ;
+    // new_order.bill_status = ;
+    // new_order.bill = ;
+    // new_order.bill_number = ;
+
+    this.http.createOrder(new_order);
+
+  }
     
+
   // Simulado por si no funciona la api
   //------------------------------------
   // this.payment_options.push(

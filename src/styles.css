@@ -1,3 +1,5 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 @font-face {
 	font-family:'Roboto-Regular';
 	src:url('/assets/tipografias/roboto/Roboto-Regular.ttf') format('truetype');

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiWebcorporateService } from '../../../services/api-webcorporate.service';
+import { GlobalVariable } from './../../../../environments/global';
 
 interface OrdenCategoriasIconos{
   position: number;
@@ -22,6 +23,7 @@ export class CategoryIconsHomeComponent implements OnInit {
   categoriasNoVisibles: OrdenCategoriasIconos[] = [];
 
   categorias: any[] = [];
+  baseIconsLocation = GlobalVariable.BASE_ICONS_LOCATION;
 
   constructor(private http:ApiWebcorporateService) { 
 

@@ -1,4 +1,4 @@
-<form> 
+<form [formGroup]="payment_form" (ngSubmit)="saveOrder()"> 
 
   <div class="container containerPaddingExtra">
     <div class="row">
@@ -34,19 +34,19 @@
                     <strong>Seleccioná Banco y cuotas</strong>
                   </li>
             
-                      <div *ngFor="let bank of banks; let i=index;">
-                          <li class="collapsed list-group-item d-flex justify-content-between align-items-center cursorPointer" data-toggle="collapse"  [attr.data-target]='bank.bank_key2' role="button" aria-expanded="false" aria-controls="collapseExample">
-                              <span>{{ bank.bank_name }} <small class="form-text d-inline ml-1">({{ bank.bank_comments }})</small></span>
-                              <img class="bolsaComprasDeploy" src="assets/icos/deploy.svg">
-                            </li>
-                            <div class="collapse" [id]='bank.bank_key'  data-parent="#listadoBancos">
-                              <li class="list-group-item p-2 rounded-0">
-                                <div class="list-group-flush">
-                                  <button (click)="bankBenefitSelected(linea.bank_benefit_id)"   *ngFor="let linea of bank.bank_benefits;" type="button" class="p-2 pl-5 list-group-item list-group-item-action cursorPointer" [class.active]='linea.is_active'><small>{{ linea.description }}</small></button>
-                                </div>
-                              </li>
+                  <div *ngFor="let bank of banks; let i=index;">
+                      <li class="collapsed list-group-item d-flex justify-content-between align-items-center cursorPointer" data-toggle="collapse"  [attr.data-target]='bank.bank_key2' role="button" aria-expanded="false" aria-controls="collapseExample">
+                          <span>{{ bank.bank_name }} <small class="form-text d-inline ml-1">({{ bank.bank_comments }})</small></span>
+                          <img class="bolsaComprasDeploy" src="assets/icos/deploy.svg">
+                      </li>
+                      <div class="collapse" [id]='bank.bank_key'  data-parent="#listadoBancos">
+                          <li class="list-group-item p-2 rounded-0">
+                            <div class="list-group-flush">
+                              <button (click)="bankBenefitSelected(linea.bank_benefit_id)"   *ngFor="let linea of bank.bank_benefits;" type="button" class="p-2 pl-5 list-group-item list-group-item-action cursorPointer" [class.active]='linea.is_active'><small>{{ linea.description }}</small></button>
                             </div>
+                          </li>
                       </div>
+                  </div>
             
                 </ul>
               </div>
@@ -63,31 +63,72 @@
 
                       <div class="form-group">
                           <label for="numeroTarjeta"><small>Número de tarjeta</small></label>
-                          <input type="text" class="form-control form-control-sm" id="numeroTarjeta" placeholder="Ingresar número de tarjeta">
+                          <input
+                              formControlName="card_number" 
+                              id="numeroTarjeta"
+                              type="number" 
+                              class="form-control form-control-sm"  [ngClass]="{ 'is-invalid': card_number.invalid && card_number.touched}"  
+                              placeholder="Ingresar número de tarjeta">
+                              
+                              <div *ngIf="card_number.touched && card_number.invalid" class="form-control-feedback">
+                                  <div *ngIf="card_number.hasError('required')">Numero de Tarjeta de Crédito es un dato obligatorio</div>
+                              </div>
                         </div>
+                        
+                           
+                      
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="codigoSeguridad"><small>Código de seguridad</small></label>
-                            <input type="text" class="form-control form-control-sm" id="codigoSeguridad4" placeholder="Ingresar código de seguridad">
+                            <input 
+                                formControlName="security_code"
+                                id="codigoSeguridad4"
+                                type="number" 
+                                class="form-control form-control-sm"  
+                                placeholder="Ingresar código de seguridad">
+                                <div *ngIf="security_code.touched && security_code.invalid" class="form-control-feedback">
+                                    <div *ngIf="security_code.hasError('required')">El Codigo de seguridad es un dato obligatorio</div>
+                                </div>
                           </div>
+                         
+
                           <div class="form-group col-md-6">
                             <label for="fechaVencimiento"><small>Vencimiento</small></label>
-                            <input type="text" class="form-control form-control-sm" id="fechaVencimiento" placeholder="Ingresar fecha de vencimiento">
+                            <input 
+                                formControlName="expired_on"
+                                id="fechaVencimiento"
+                                type="text" 
+                                class="form-control form-control-sm"  
+                                placeholder="Ingresar fecha de vencimiento">
+                                <div *ngIf="expired_on.touched && expired_on.invalid" class="form-control-feedback">
+                                    <div *ngIf="expired_on.hasError('required')">La Fecha de Vencimiento es un dato obligatorio</div>
+                                </div>
                           </div>
+                          
                         </div>
+
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="tipoDocumento"><small>Tipo de documento</small></label>
-                            <select id="tipoDocumento" class="form-control form-control-sm">
+                            <select formControlName="id_type" id="tipoDocumento" class="form-control form-control-sm">
                               <option selected>DNI</option>
                               <option>LC</option>
                               <option>LE</option>
                             </select>
                           </div>
+                          
                           <div class="form-group col-md-6">
                             <label for="numeroDocumento"><small>Número de documento</small></label>
-                            <input type="text" class="form-control form-control-sm" id="numeroDocumento">
+                            <input
+                                formControlName="id_number" 
+                                id="numeroDocumento"
+                                type="number" 
+                                class="form-control form-control-sm">
+                                <div *ngIf="id_number.touched && id_number.invalid" class="form-control-feedback">
+                                    <div *ngIf="id_number.hasError('required')">El Número de documento es un dato obligatorio</div>
+                                </div>
                           </div>
+                          
                         </div>
                         <div class="form-group">
                           <div class="form-check">
@@ -116,7 +157,7 @@
                     <strong>Resumen de compra</strong>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Productos ({{ cant_items_carrito }})
+                    Productos ({{ cart_quantity }})
                     <span>${{ total_amount_cart}}</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -131,6 +172,11 @@
               </div>
             </div>
 
+            
+                <!-- <div>Informacion del Formulario</div>
+                <pre>Form Valido:  {{ payment_form.valid  }} </pre>
+                <pre>Valores: <br> {{ payment_form.value | json }} </pre>
+             -->
 
       </div>
     </div>
@@ -140,9 +186,8 @@
     <div class="row">
       <div class="col text-right">
         <button 
-            *ngIf="cant_items_carrito"
-            (click)="saveOrder()" 
-            type="button" 
+            *ngIf="cart_quantity"
+            type="submit" 
             class="btn btn-lg botonFullWidthMobile btn-institucional margenInferior">
                 Confirmar Compra
         </button>
@@ -151,3 +196,5 @@
   </div>
 
 </form>
+
+<!-- (click)="saveOrder()"  -->

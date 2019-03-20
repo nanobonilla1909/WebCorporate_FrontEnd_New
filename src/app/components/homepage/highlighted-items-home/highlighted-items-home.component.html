@@ -11,7 +11,7 @@
           
             <a class="categoriaPopular categoriaPopularDoble" href="#">
                 <div class="categoriaPopularImagen">
-                  <img [src]="highlighted_items[0] && highlighted_items[0].image">
+                  <img [src]="highlighted_items[0] && baseImagesLocation + highlighted_items[0].image">
                 </div>
                 <span class="categoriaPopularTitulo">{{ highlighted_items[0] && highlighted_items[0].title }}</span>
               </a>
@@ -22,14 +22,14 @@
             <a class="categoriaPopular" href="#">
                 <span class="categoriaPopularTitulo">{{ highlighted_items[1] && highlighted_items[1].title }}</span>
                 <div class="categoriaPopularImagen">
-                  <img [src]="highlighted_items[1] && highlighted_items[1].image">
+                  <img [src]="highlighted_items[1] && baseImagesLocation + highlighted_items[1].image">
                 </div>
             </a>
 
             <a class="categoriaPopular" href="#">
                 <span class="categoriaPopularTitulo">{{ highlighted_items[2] && highlighted_items[2].title }}</span>
                 <div class="categoriaPopularImagen">
-                  <img [src]="highlighted_items[2] && highlighted_items[2].image">
+                  <img [src]="highlighted_items[2] && baseImagesLocation + highlighted_items[2].image">
                 </div>
             </a>
 
@@ -39,14 +39,14 @@
             <a class="categoriaPopular" href="#">
                 <span class="categoriaPopularTitulo">{{ highlighted_items[3] && highlighted_items[3].title }}</span>
                 <div class="categoriaPopularImagen">
-                  <img [src]="highlighted_items[3] && highlighted_items[3].image">
+                  <img [src]="highlighted_items[3] && baseImagesLocation + highlighted_items[3].image">
                 </div>
             </a>
 
             <a class="categoriaPopular" href="#">
                 <span class="categoriaPopularTitulo">{{ highlighted_items[4] && highlighted_items[4].title }}</span>
                 <div class="categoriaPopularImagen">
-                  <img [src]="highlighted_items[4] && highlighted_items[4].image">
+                  <img [src]="highlighted_items[4] && baseImagesLocation + highlighted_items[4].image">
                 </div>
             </a>
 

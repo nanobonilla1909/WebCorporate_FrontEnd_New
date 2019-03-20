@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiWebcorporateService } from '../../../services/api-webcorporate.service';
 import { HighlightedItem } from '../../../models/highlighted-item.model';
+import { GlobalVariable } from './../../../../environments/global';
 
 @Component({
   selector: 'app-highlighted-items-home',
@@ -11,6 +12,7 @@ export class HighlightedItemsHomeComponent implements OnInit {
   
 highlighted_items: HighlightedItem[] = [];
 
+baseImagesLocation = GlobalVariable.BASE_IMAGES_LOCATION;
 
 constructor(private http:ApiWebcorporateService) {
 

@@ -5,6 +5,9 @@ import { ApiWebcorporateService } from '../../../services/api-webcorporate.servi
 import { CartItemsQuantity } from '../../../services/cart-items-quantity';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDetailComponent } from '../product-detail/product-detail.component';
+import { GlobalVariable } from './../../../../environments/global';
+
+
 
 @Component({
   selector: 'app-product-card',
@@ -23,6 +26,8 @@ export class ProductCardComponent implements OnInit {
   view_type_active_listado: boolean;
 
   resultado: string;
+
+  baseImagesLocation = GlobalVariable.BASE_IMAGES_LOCATION;
 
 
   constructor(private http: ApiWebcorporateService, private cart_items_service: CartItemsQuantity, public dialog: MatDialog) { 

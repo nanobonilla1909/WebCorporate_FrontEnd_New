@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Orden Creada con Exito!</h2>
+<mat-dialog-content class="mat-typography">
+ 
+  <h3>Su Orden es la #999999</h3>
+  <p>Nos pondremos en contacto proximamente para gestionar la entrega.</p>
+ 
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button routerLink="/my-orders" mat-dialog-close>Ir a Mis Ordenes</button>
+  <button mat-button [mat-dialog-close]="true" routerLink="/home" cdkFocusInitial>Volver a Comprar</button>
+</mat-dialog-actions>

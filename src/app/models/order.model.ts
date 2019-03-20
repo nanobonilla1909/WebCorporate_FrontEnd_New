@@ -1,6 +1,7 @@
 import { OrderItem } from './order-item.model';
 
 export class Order {
+    created_at: Date;
     order_number: number;
     order_type_id: number;
     customer_id: number;

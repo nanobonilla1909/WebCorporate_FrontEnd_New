@@ -5,30 +5,37 @@ import 'rxjs/add/operator/map';
 import { CartItem } from '../models/cart-item';
 import { Order } from '../models/order.model';
 
+import { GlobalVariable } from '../../environments/global';
+
 
 @Injectable()
 export class ApiWebcorporateService {
 
+  private baseApiUrl = GlobalVariable.BASE_API_URL;
+
+
   constructor(private http:HttpClient) {  
 
-  
+
   }
+
 
 
   getCategoriesOrder() 
   {
-    return this.http.get('http://localhost:8000/api/home_page_category_orders');
+    let f = 1;
+    return this.http.get(this.baseApiUrl + '/home_page_category_orders');
   }
 
   getFeaturedProducts() 
   {
-    return this.http.get('http://localhost:8000/api/featured_products');
+    return this.http.get(this.baseApiUrl + '/featured_products');
   }
 
 
   getHighlightedItems()
   {
-    return this.http.get('http://localhost:8000/api/highlighted_items');
+    return this.http.get(this.baseApiUrl + '/highlighted_items');
 
   }
 
@@ -39,7 +46,7 @@ export class ApiWebcorporateService {
   getCategoryProductChildren(product_category_id)
   {
 
-    const url = 'http://localhost:8000/api/category_last_products_children/' + product_category_id;
+    const url = this.baseApiUrl + '/category_last_products_children/' + product_category_id;
  
     return this.http.get(url);
   }
@@ -51,7 +58,7 @@ export class ApiWebcorporateService {
   getCategoryCharacterizedProductChildren(product_category_id)
   {
 
-    const url = 'http://localhost:8000/api/category_last_products_children_characterized/' + product_category_id;
+    const url = this.baseApiUrl + '/category_last_products_children_characterized/' + product_category_id;
  
     return this.http.get(url);
   }
@@ -63,7 +70,7 @@ export class ApiWebcorporateService {
   getChildrenCategories(product_category_id)
   {
 
-    const url = 'http://localhost:8000/api/category_children/' + product_category_id;
+    const url = this.baseApiUrl + '/category_children/' + product_category_id;
  
     return this.http.get(url);
   }
@@ -79,7 +86,7 @@ export class ApiWebcorporateService {
 
   createCartItem(cart_item: CartItem) {
 
-    return this.http.post('http://localhost:8000/api/cart_items', cart_item);
+    return this.http.post(this.baseApiUrl + '/cart_items', cart_item);
   }
 
 
@@ -90,7 +97,7 @@ export class ApiWebcorporateService {
   getCartItemsQuantity(cart_item_id)
   {
 
-    const url = 'http://localhost:8000/api/cart_items_quantity/' + cart_item_id;
+    const url = this.baseApiUrl + '/cart_items_quantity/' + cart_item_id;
  
     return this.http.get(url);
 
@@ -104,7 +111,7 @@ export class ApiWebcorporateService {
   getCartItems(cart_item_id)
   {
 
-    const url = 'http://localhost:8000/api/carts/' + cart_item_id;
+    const url = this.baseApiUrl + '/carts/' + cart_item_id;
  
     return this.http.get(url);
 
@@ -116,7 +123,15 @@ export class ApiWebcorporateService {
 
   getUserDeliveryInformation(user) {
 
-    const url = 'http://localhost:8000/api/users/' + user + '/deliveries';
+    const url = this.baseApiUrl + '/users/' + user + '/deliveries';
+ 
+    return this.http.get(url);
+
+  }
+
+  getUserOrders(user) {
+
+    const url = this.baseApiUrl + '/users/' + user + '/orders';
  
     return this.http.get(url);
 
@@ -127,7 +142,7 @@ export class ApiWebcorporateService {
 
   getPaymentOptions() {
 
-    const url = 'http://localhost:8000/api/payment_options';
+    const url = this.baseApiUrl + '/payment_options';
  
     return this.http.get(url);
 
@@ -139,7 +154,10 @@ export class ApiWebcorporateService {
 
  createOrder(new_order: Order) {
 
-  return this.http.post('http://localhost:8000/api/orders', new_order);
+  console.log("CREA LA ORDEN");
+  // console.log(new_order);
+
+  return this.http.post(this.baseApiUrl + '/orders', new_order);
 }
 
 

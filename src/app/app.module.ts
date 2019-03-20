@@ -45,6 +45,9 @@ import { ProductDetailComponent } from './components/shared/product-detail/produ
 
 // Modulos de Angular Material
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormWithErrorsComponent } from './components/shared/form-with-errors/form-with-errors.component';
+import { OrderPlacedComponent } from './components/checkoutpage/modals/order-placed/order-placed.component';
+import { MyOrdersComponent } from './components/profile/my-orders/my-orders.component';
  
 
 
@@ -76,7 +79,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     StepperComponent,
     ShippingComponent,
     PaymentComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    FormWithErrorsComponent,
+    OrderPlacedComponent,
+    MyOrdersComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +95,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     // RouterModule.forRoot( ROUTES, { useHash: true, enableTracing: true } )
   ],
   entryComponents: [
-    ProductDetailComponent
+    ProductDetailComponent,
+    FormWithErrorsComponent,
+    OrderPlacedComponent
   ],
   providers: [
     ApiWebcorporateService,

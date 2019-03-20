@@ -1,0 +1,204 @@
+<app-navegacion-superior></app-navegacion-superior>
+<app-navegacion-inferior></app-navegacion-inferior>
+<br>
+
+
+<div class="container containerPaddingExtra">
+	<div class="row">
+		<div class="col">
+			<h2 class="tituloSeccionSecundario"><strong>Mis Compras</strong></h2>
+			<h6 class="mt-2">Aquí encontrarás tu historial de compras.</h6>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+
+
+
+			<!-- <?php include 'inc/ordenesHistorial.php';?> -->
+      <div class="row mb-5">
+          <div class="col" id="listadoCompras">
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-title">
+                <strong>Historial de Compras</strong>
+              </li>
+        
+
+              <div *ngFor="let user_order of user_orders; let i=index;">
+                
+                  <li class="collapsed list-group-item cursorPointer pb-2" data-toggle="collapse" data-target="#collapse"  role="button" aria-expanded="false" aria-controls="collapseExample">
+                      <div class="row">
+                        <div class="col-10 col-lg-11">
+                          <div class="row">
+                            <div class="col-6 col-lg-2 text-lg-center">{{ user_order.created_at | date : 'mediumDate' }}</div>
+                            <div class="col-6 col-lg-2 text-lg-left"><small>Orden #{{ user_order.order_number }}</small></div>
+                            <div class="col-6 col-lg-4 text-lg-left"><small>Estado: </small></div>
+                            <div class="col-6 col-lg-3 text-lg-center"><small></small></div>
+                            <div class="col-6 d-lg-none"></div>
+                            <div class="col-6 col-lg-1 text-lg-right"><span class="productoPrecio">${{ user_order.total | number:'1.2-2'}}</span></div>
+                          </div>
+                        </div>
+                        <div class="col-2 col-lg-1 text-right">
+                          <img class="bolsaComprasDeploy" src="/assets/icos/deploy.svg">
+                        </div>
+                      </div>
+                  </li>
+                  <div *ngFor="let item of user_order.order_items; let i=index;">
+
+                    <div class="collapse" id="collapseBanco01">
+                      <li class="list-group-item rounded-0 p-0">
+                          <div class="list-group-flush">
+                           
+                           
+                            <span class="list-group-item">
+                                <div class="row">
+                                  <div class="col-12 col-lg-11">
+                                    <div class="row">
+                                      <div class="col-12 col-sm-3 col-lg-2 text-lg-center">
+                                        <div class="historialImagenProducto d-md-inline-block">
+                                          <img class="mt-lg-2 mb-3 mb-lg-2" [src]="baseImagesLocation + item.image">
+                                        </div>
+                                      </div>
+                                      <div class="col-12 col-sm-9 col-lg-6 text-lg-left">
+                                        <p class="historialNombreProducto">{{ item.description }}</p>
+                                        <!-- <p class="historialDescripcionProducto mb-1">Elegancia y robustez a partes iguales. Su marco metálico protegerá tu smartphone para que puedas admirar la belleza de tu Galaxy J7 por más tiempo. Disfruta de fotos lo más nítidas posible incluso en escenas oscuras, y todo gracias al rápido objetivo F1.9 de su cámara delantera y trasera. Y para que no te pierdas ningún momento, accede a la cámara haciendo doble clic en el botón de inicio. Con Galaxy J7 no tendrás perfil malo. Gracias a su LED frontal y el modo belleza, siempre saldrás perfecto. Además, con el reconocimiento de saludo podrás hacer el selfie perfecto en cuestión de segundos.</p>
+                                        <span class="modalProductoPrecioPromo">¡5% OFF en la 2da. unidad!</span> -->
+                                      </div>
+                                      <div class="col-0 col-sm-3 d-lg-none"></div>
+                                      <div class="col-6 col-sm-4 col-lg-3 text-lg-center"><small>Cantidad: {{ item.quantity }}</small></div>
+                                      <div class="col-6 col-sm-5 col-lg-1 text-lg-right"><span class="productoPrecio text-dark">{{ item.subtotal | number:'1.2-2'}}</span></div>
+                                    </div>
+                                  </div>
+                                  <div class="col-0 col-lg-1"></div>
+                                </div>
+                              </span>
+        
+                          </div>
+                        </li>
+                      </div>
+                  </div>
+              </div>
+              
+                <li class="collapsed list-group-item cursorPointer pb-2" data-toggle="collapse" data-target="#collapseBanco02" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <div class="row">
+                  <div class="col-10 col-lg-11">
+                    <div class="row">
+                      <div class="col-6 col-lg-2 text-lg-center">05/08/2019</div>
+                      <div class="col-6 col-lg-2 text-lg-left"><small>Orden 587454</small></div>
+                      <div class="col-6 col-lg-4 text-lg-left"><small>Retirado (08/05/2019)</small></div>
+                      <div class="col-6 col-lg-3 text-lg-center"><small>Productos: 5</small></div>
+                      <div class="col-6 d-lg-none"></div>
+                      <div class="col-6 col-lg-1 text-lg-right"><span class="productoPrecio">$4.500<span class="productoPrecioDecimal">70</span></span></div>
+                    </div>
+                  </div>
+                  <div class="col-2 col-lg-1 text-right">
+                    <img class="bolsaComprasDeploy" src="/assets/icos/deploy.svg">						
+                  </div>
+                </div>
+              </li>
+              <div class="collapse" id="collapseBanco02">
+                <li class="list-group-item p-2 rounded-0">
+                  <div class="list-group-flush">
+                    <!-- <?php include 'inc/ordenesHistorialItem.php';?> -->
+                    <span class="list-group-item">
+                        <div class="row">
+                          <div class="col-12 col-lg-11">
+                            <div class="row">
+                              <div class="col-12 col-sm-3 col-lg-2 text-lg-center">
+                                <div class="historialImagenProducto d-md-inline-block">
+                                  <img class="mt-lg-2 mb-3 mb-lg-2" src="productos/alfajores.jpg">
+                                </div>
+                              </div>
+                              <div class="col-12 col-sm-9 col-lg-6 text-lg-left">
+                                <p class="historialNombreProducto">Havana Club Añejo Especial Ron Dorado Botella De 750 Ml Nombre de producto muy largo, puede tener muchos caracteres</p>
+                                <p class="historialDescripcionProducto mb-1">Elegancia y robustez a partes iguales. Su marco metálico protegerá tu smartphone para que puedas admirar la belleza de tu Galaxy J7 por más tiempo. Disfruta de fotos lo más nítidas posible incluso en escenas oscuras, y todo gracias al rápido objetivo F1.9 de su cámara delantera y trasera. Y para que no te pierdas ningún momento, accede a la cámara haciendo doble clic en el botón de inicio. Con Galaxy J7 no tendrás perfil malo. Gracias a su LED frontal y el modo belleza, siempre saldrás perfecto. Además, con el reconocimiento de saludo podrás hacer el selfie perfecto en cuestión de segundos.</p>
+                                <span class="modalProductoPrecioPromo">¡5% OFF en la 2da. unidad!</span>
+                              </div>
+                              <div class="col-0 col-sm-3 d-lg-none"></div>
+                              <div class="col-6 col-sm-4 col-lg-3 text-lg-center"><small>Cantidad: 2</small></div>
+                              <div class="col-6 col-sm-5 col-lg-1 text-lg-right"><span class="productoPrecio text-dark">$4.500<span class="productoPrecioDecimal">70</span></span></div>
+                            </div>
+                          </div>
+                          <div class="col-0 col-lg-1"></div>
+                        </div>
+                      </span>
+                  </div>
+                </li>
+              </div>
+        
+              <li class="collapsed list-group-item cursorPointer pb-2" data-toggle="collapse" data-target="#collapseBanco03" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <div class="row">
+                  <div class="col-10 col-lg-11">
+                    <div class="row">
+                      <div class="col-6 col-lg-2 text-lg-center">05/08/2019</div>
+                      <div class="col-6 col-lg-2 text-lg-left"><small>Orden 587454</small></div>
+                      <div class="col-6 col-lg-4 text-lg-left"><small>Retirado (08/05/2019)</small></div>
+                      <div class="col-6 col-lg-3 text-lg-center"><small>Productos: 5</small></div>
+                      <div class="col-6 d-lg-none"></div>
+                      <div class="col-6 col-lg-1 text-lg-right"><span class="productoPrecio">$4.500<span class="productoPrecioDecimal">70</span></span></div>
+                    </div>
+                  </div>
+                  <div class="col-2 col-lg-1 text-right">
+                    <img class="bolsaComprasDeploy" src="/assets/icos/deploy.svg">						
+                  </div>
+                </div>
+              </li>
+              <div class="collapse" id="collapseBanco03">
+                <li class="list-group-item p-2 rounded-0">
+                  <div class="list-group-flush">
+                    <!-- <?php include 'inc/ordenesHistorialItem.php';?> -->
+
+                    <span class="list-group-item">
+                        <div class="row">
+                          <div class="col-12 col-lg-11">
+                            <div class="row">
+                              <div class="col-12 col-sm-3 col-lg-2 text-lg-center">
+                                <div class="historialImagenProducto d-md-inline-block">
+                                  <img class="mt-lg-2 mb-3 mb-lg-2" src="productos/alfajores.jpg">
+                                </div>
+                              </div>
+                              <div class="col-12 col-sm-9 col-lg-6 text-lg-left">
+                                <p class="historialNombreProducto">Havana Club Añejo Especial Ron Dorado Botella De 750 Ml Nombre de producto muy largo, puede tener muchos caracteres</p>
+                                <p class="historialDescripcionProducto mb-1">Elegancia y robustez a partes iguales. Su marco metálico protegerá tu smartphone para que puedas admirar la belleza de tu Galaxy J7 por más tiempo. Disfruta de fotos lo más nítidas posible incluso en escenas oscuras, y todo gracias al rápido objetivo F1.9 de su cámara delantera y trasera. Y para que no te pierdas ningún momento, accede a la cámara haciendo doble clic en el botón de inicio. Con Galaxy J7 no tendrás perfil malo. Gracias a su LED frontal y el modo belleza, siempre saldrás perfecto. Además, con el reconocimiento de saludo podrás hacer el selfie perfecto en cuestión de segundos.</p>
+                                <span class="modalProductoPrecioPromo">¡5% OFF en la 2da. unidad!</span>
+                              </div>
+                              <div class="col-0 col-sm-3 d-lg-none"></div>
+                              <div class="col-6 col-sm-4 col-lg-3 text-lg-center"><small>Cantidad: 2</small></div>
+                              <div class="col-6 col-sm-5 col-lg-1 text-lg-right"><span class="productoPrecio text-dark">$4.500<span class="productoPrecioDecimal">70</span></span></div>
+                            </div>
+                          </div>
+                          <div class="col-0 col-lg-1"></div>
+                        </div>
+                      </span>
+
+
+                  </div>
+                </li>
+              </div>
+        
+            </ul>
+          </div>
+        </div> 
+     
+     
+     
+     
+      <!-- <?php include 'inc/ordenesHistorial.php';?> -->
+      
+
+
+
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col text-right">
+			<button onclick="window.location.href='confirmacion.php'" type="button" class="btn btn-lg botonFullWidthMobile btn-institucional margenInferior">Volver</button>
+		</div>
+	</div>
+</div>

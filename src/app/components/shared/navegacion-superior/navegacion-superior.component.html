@@ -11,9 +11,16 @@
         <div class="input-group">
           <input type="text" class="form-control headerBarraBusqueda" placeholder="¿Qué estás buscando?" aria-label="Barra de búsqueda" aria-describedby="basic-addon2">
           <div class="input-group-append">
-            <button onclick="window.location.href='resultados.php'" class="btn headerBotonBuscar" type="button">
+            <button 
+              class="btn headerBotonBuscar" type="button"
+              [routerLink]="['/results']" 
+              [queryParams]="{ search_text: 'Whisky' }"
+              >
               <img class="headerIcoBuscar" src="assets/img/header/ico_buscar.svg">
             </button>
+            <!-- <button onclick="window.location.href='resultados.php'" class="btn headerBotonBuscar" type="button">
+                <img class="headerIcoBuscar" src="assets/img/header/ico_buscar.svg">
+              </button> -->
           </div>
         </div>
       </div>

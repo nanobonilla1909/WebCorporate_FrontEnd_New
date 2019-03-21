@@ -15,7 +15,8 @@
 						[routerLink]="['/results']" 
 						[queryParams]="{ category_id: categoriaVisible.product_category_id, 
 							category_name: categoriaVisible.category_name }"
-						>{{ categoriaVisible.category_name }}</a>
+						>{{ categoriaVisible.category_name }}
+				</a>
 			</li>
 			
       <li *ngFor="let categoriaNoVisible of categoriasNoVisibles; " class="nav-item nav-itemNoDesktop">
@@ -54,7 +55,7 @@
 				<div class="dropdown-menu dropdownUserMenu" aria-labelledby="navbarDropdown">
 					<a class="dropdown-item dropdown-itemUserMenu" href="#">Mi Bolsa de Compras</a>
 					<a class="dropdown-item dropdown-itemUserMenu" href="#">Mi Cuenta</a>
-					<a class="dropdown-item dropdown-itemUserMenu" href="#">Mis Compras</a>
+					<a [routerLink]="['/my-orders']" class="dropdown-item dropdown-itemUserMenu">Mis Compras</a>
 					<a class="dropdown-item dropdown-itemUserMenu" href="#">Mi Wishlist</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item dropdown-itemUserMenu" href="#">Ayuda</a>

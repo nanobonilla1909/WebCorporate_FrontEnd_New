@@ -47,6 +47,7 @@ export class ResultsComponent implements OnInit {
 
   products: any[] = [];
   products_results: Product[] = [];
+  filtered_product_list: number[] = [];
   products_results_filtered: number[] = [];
   products_results_filtered_attr2: number[] = [];
   characterized_products: CharacterizedProduct[] = [];
@@ -64,6 +65,7 @@ export class ResultsComponent implements OnInit {
 
   breadCrumb: {categId: number, categName: string}[] = [];
   qtyProductsSelectedCategory: number;
+  qtyProductsSearchedTerm: number;
   cant_items_carrito: number = 0;
 
 
@@ -81,36 +83,39 @@ export class ResultsComponent implements OnInit {
   ngOnInit() {
     
 
-    console.log("Pasa por en Init de Results.ts")
-
     this.loading = true;
-
-    // Prepara el breadcrumb
-    this.breadCrumb.push({categId: 0, categName: 'Inicio'});
 
     Observable.combineLatest([
       this.route.paramMap,
       this.route.queryParamMap
     ]).subscribe(combined => {
-
-
-      console.log("ESTAMOS DE ACUERDO QUE PASA POR ACA???!??!?!");
+      
       // Captura Variables de la ruta (url)
       this.selectedCategory = +combined[1].get('category_id');
       this.selectedCategoryName  = combined[1].get('category_name');
       this.searchTerm  = combined[1].get('searchTerm');
       this.currentCategory = new CategoryNode(this.selectedCategory, this.selectedCategoryName, this.http); 
 
-      console.log("this.selectedCategory: ",this.selectedCategory)
-      console.log("this.selectedCategoryName: ",this.selectedCategoryName)
+      // console.log("this.selectedCategory: ",this.selectedCategory)
+      // console.log("this.selectedCategoryName: ",this.selectedCategoryName)
+      // console.log("this.searchTerm: ",this.searchTerm)
       
 
       // Inicializa Variables
       this.qtyProductsSelectedCategory = 0;
+      this.qtyProductsSearchedTerm = 0;
+      this.products_results = [];
+      this.products_results_filtered = [];
+      this.products_results_filtered_attr2 = [];
+      this.characterized_products = [];
+      this.characterized_products_sorted = [];
+      this.product_attributes = [];
+      this.selectedOptions1 = [];
+      this.selectedOptions2 = [];
+      this.children_categories = [];
+   
 
-      this.breadCrumb.push({categId: this.selectedCategory, categName: this.selectedCategoryName});
-      
-
+      // Pone la Cantidad de Articulos en el Carrito de Compras
       this.http.getCartItemsQuantity(1)
             .subscribe( (resp: any) => {
             this.cant_items_carrito = +resp.data[0].items_quantity;
@@ -118,24 +123,17 @@ export class ResultsComponent implements OnInit {
       });    
 
 
-      if (this.selectedCategory != null) {
+      if (this.selectedCategoryName != null) {
 
-        this.products_results = [];
-        this.products_results_filtered = [];
-        // agregado desde aca
-        this.products_results_filtered_attr2 = [];
-        this.characterized_products = [];
-        this.characterized_products_sorted = [];
-        this.product_attributes = [];
-
-        this.selectedOptions1 = [];
-        this.selectedOptions2 = [];
-        this.children_categories = [];
-
+        // Prepara el breadcrumb
+        this.breadCrumb.push({categId: 0, categName: 'Inicio'});
+        this.breadCrumb.push({categId: this.selectedCategory, categName: this.selectedCategoryName});
+      
         // Trae Todos los Productos de la Categoria seleccionada
         this.http.getCategoryProductChildren(this.selectedCategory)
             .subscribe( (resp: any) => {
             this.products = resp.data;
+            console.log("Products", this.products)
             this.products_results = [];
             for (let unProd of this.products) {
               this.products_results.push({id: unProd.id, name:unProd.name, description:unProd.description, price: unProd.price, image: unProd.image})
@@ -222,7 +220,43 @@ export class ResultsComponent implements OnInit {
   
         }); 
 
-      }
+      } else {
+
+        this.breadCrumb = [];
+        
+        this.http.getSearchedProducts(this.searchTerm)
+            .subscribe( (resp: any) => {
+            this.products = resp.data;
+            console.log("Products", this.products)
+
+                this.products_results = [];
+                this.filtered_product_list = [];
+                for (let unProd of this.products) {
+                     this.products_results.push({id: unProd.id, name:unProd.name, description:unProd.description, price: unProd.price, image: unProd.image})
+                     this.products_results_filtered.push(unProd.id)
+                } 
+
+                // Obtiene todos los Productos Caracterizados de la categoria elegida    
+                this.http.getCharacterizedProductsFromList(this.products_results_filtered)
+                    .subscribe( (resp: any) => {
+
+                    this.characterized_products = resp.data;
+                    //console.log("a ver si funciono??: ", this.characterized_products);
+                    this.arma_atributos();
+ 
+                    this.create_product_attributes_1_to_4();
+
+                    console.log("this.product_attributes1: ", this.product_attributes1);
+                    console.log("this.product_attributes2: ", this.product_attributes2);
+
+                    this.loading = false;
+
+
+                  }); 
+
+        });    
+
+      };
 
       
     });
@@ -298,6 +332,42 @@ export class ResultsComponent implements OnInit {
     } 
   }
 
+
+  arma_atributos(){
+    // Ordena los registros en: this.characterized_products_sorted 
+    this.characterized_products_sorted = this.characterized_products.sort(
+      function(a, b) {
+        if (a.type_id === b.type_id) {
+          return a.options_id - b.options_id;
+        }
+        return a.type_id > b.type_id ? 1 : -1;
+      }
+    );
+
+    this.initialize_product_attributes_1_to_4();
+
+    // Arma una lista unificada de Atributos y Valores (product_attributes)
+    var type_id_ant = this.characterized_products_sorted[0].type_id;
+    var options_id_ant = this.characterized_products_sorted[0].options_id;
+    var name_ant = this.characterized_products_sorted[0].name;
+    var value_ant = this.characterized_products_sorted[0].value;
+
+    for(var i = 0; i < this.characterized_products_sorted.length; i++) {
+      
+      if (this.characterized_products_sorted[i].options_id != options_id_ant ||
+        this.characterized_products_sorted[i].type_id != type_id_ant ) {
+
+          this.product_attributes.push({type_id: type_id_ant, name: name_ant, options_id: options_id_ant, value: value_ant})
+          type_id_ant = this.characterized_products_sorted[i].type_id;
+          options_id_ant = this.characterized_products_sorted[i].options_id;
+          name_ant = this.characterized_products_sorted[i].name;
+          value_ant = this.characterized_products_sorted[i].value;
+
+      }
+    }
+    this.product_attributes.push({type_id: type_id_ant, name: name_ant, options_id: options_id_ant, value: value_ant})
+
+  }
 
   initialize_product_attributes_1_to_4(){
     this.product_attributes = [];
@@ -380,6 +450,45 @@ export class ResultsComponent implements OnInit {
     
     return this.product_attributes1;
   }
+
+
+ /* 
+
+  ngOnChanges(): void {
+    //Called after ngOnInit when the component's or directive's content has been initialized.
+    //Add 'implements AfterContentInit' to the class.
+    console.log("en results: ngOnChanges");
+
+  }
+
+  ngAfterContentInit(): void {
+    //Called after ngOnInit when the component's or directive's content has been initialized.
+    //Add 'implements AfterContentInit' to the class.
+    console.log("en results: ngAfterContentInit");
+
+  }
+
+  ngAfterContentChecked(): void {
+    //Called after every check of the component's or directive's content.
+    //Add 'implements AfterContentChecked' to the class.
+    console.log("en results: ngAfterContentChecked");
+
+  }
+
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    console.log("en results: ngAfterViewInit");
+
+  }
+
+  ngAfterViewChecked(): void {
+    //Called after every check of the component's view. Applies to components only.
+    //Add 'implements AfterViewChecked' to the class.
+    console.log("en results: ngAfterViewChecked");
+
+  }
+*/
 
 
 }

@@ -1,44 +1,52 @@
-<div class="headerInstColor">
-  <div class="container headerPadding">
-    <div class="row text-center">
-      <div class="col-1 col-lg-3 col-xl-2 columnaFlex columnaFlexHeader">
-        <a class="headerLinkHome" href="index.php">
-          <img class="sg_inst sg_logo mr-3" src="assets/img/header/sg_logo.svg">
-          <img class="sg_inst sg_iso" src="assets/img/header/sg_iso.svg">
-        </a>
-      </div>
-      <div class="col-8 col-sm-9 col-lg-6 col-xl-7 columnaFlex columnaFlexHeader">
-        <div class="input-group">
-          <input type="text" class="form-control headerBarraBusqueda" placeholder="¿Qué estás buscando?" aria-label="Barra de búsqueda" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button 
-              class="btn headerBotonBuscar" type="button"
-              [routerLink]="['/results']" 
-              [queryParams]="{ search_text: 'Whisky' }"
-              >
-              <img class="headerIcoBuscar" src="assets/img/header/ico_buscar.svg">
-            </button>
-            <!-- <button onclick="window.location.href='resultados.php'" class="btn headerBotonBuscar" type="button">
-                <img class="headerIcoBuscar" src="assets/img/header/ico_buscar.svg">
-              </button> -->
+<form #forma="ngForm">
+    <div class="headerInstColor">
+        <div class="container headerPadding">
+          <div class="row text-center">
+            <div class="col-1 col-lg-3 col-xl-2 columnaFlex columnaFlexHeader">
+              <a class="headerLinkHome" href="index.php">
+                <img class="sg_inst sg_logo mr-3" src="assets/img/header/sg_logo.svg">
+                <img class="sg_inst sg_iso" src="assets/img/header/sg_iso.svg">
+              </a>
+            </div>
+            <div class="col-8 col-sm-9 col-lg-6 col-xl-7 columnaFlex columnaFlexHeader">
+              <div class="input-group">
+                <input 
+                    type="text" 
+                    class="form-control headerBarraBusqueda" 
+                    placeholder="¿Qué estás buscando?" 
+                    aria-label="Barra de búsqueda" 
+                    aria-describedby="basic-addon2"
+                    name="searchedText"
+                    [(ngModel)]="searchedText">
+                <div class="input-group-append">
+                  <button 
+                    class="btn headerBotonBuscar" type="button"
+                    (click)="searchSubmitted(forma)"
+                    >
+                    <img class="headerIcoBuscar" src="assets/img/header/ico_buscar.svg">
+                  </button>
+                  <!-- <button onclick="window.location.href='resultados.php'" class="btn headerBotonBuscar" type="button">
+                      <img class="headerIcoBuscar" src="assets/img/header/ico_buscar.svg">
+                    </button> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-3 col-sm-2 col-lg-3 columnaFlex columnaFlexLeft columnaFlexHeader">
+              <a class="headerLink headerLinkBolsaCompras" 	[routerLink]="['/checkout-bag']">
+                <img class="headerLinkImagen" src="assets/icos/bolsa_compras.svg">
+                <span class="badge headerLinkBadge">{{ cant_items_bolsa }}</span>
+              </a>
+              <img class="headerLinkSeparador" src="assets/img/header/separador.svg">
+              <a class="headerLink headerLinkFavorito" href="#">
+                <img class="headerLinkImagen" src="assets/img/header/ico_favorito.svg">
+              </a>
+              <img class="headerLinkSeparador" src="assets/img/header/separador.svg">
+              <a class="headerLink headerLinkAyuda" href="#">
+                <img class="headerLinkImagen" src="assets/img/header/ico_ayuda.svg">
+                <span class="headerLinkEtiqueta">Ayuda</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-3 col-sm-2 col-lg-3 columnaFlex columnaFlexLeft columnaFlexHeader">
-        <a class="headerLink headerLinkBolsaCompras" 	[routerLink]="['/checkout-bag']">
-          <img class="headerLinkImagen" src="assets/icos/bolsa_compras.svg">
-          <span class="badge headerLinkBadge">{{ cant_items_bolsa }}</span>
-        </a>
-        <img class="headerLinkSeparador" src="assets/img/header/separador.svg">
-        <a class="headerLink headerLinkFavorito" href="#">
-          <img class="headerLinkImagen" src="assets/img/header/ico_favorito.svg">
-        </a>
-        <img class="headerLinkSeparador" src="assets/img/header/separador.svg">
-        <a class="headerLink headerLinkAyuda" href="#">
-          <img class="headerLinkImagen" src="assets/img/header/ico_ayuda.svg">
-          <span class="headerLinkEtiqueta">Ayuda</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
+</form>

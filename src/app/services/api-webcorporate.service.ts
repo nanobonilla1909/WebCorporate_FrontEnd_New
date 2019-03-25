@@ -39,6 +39,12 @@ export class ApiWebcorporateService {
 
   }
 
+  getSearchedProducts(searchedText)
+  {
+    return this.http.get(this.baseApiUrl + '/search/' + searchedText);
+
+  }
+
 
   // Trae los productos del ultimo nivel correspondiente a un nodo dado
   // ------------------------------------------------------------------
@@ -61,6 +67,18 @@ export class ApiWebcorporateService {
     const url = this.baseApiUrl + '/category_last_products_children_characterized/' + product_category_id;
  
     return this.http.get(url);
+  }
+
+  // Trae los productos caracterizados, dada una lista
+  // -------------------------------------------------
+
+  getCharacterizedProductsFromList(arr: number[])
+  {
+
+    let products: number[] = arr;
+
+    return this.http.post(this.baseApiUrl + '/characterized_products', products);
+
   }
 
 

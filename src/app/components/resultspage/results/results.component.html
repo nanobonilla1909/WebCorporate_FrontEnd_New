@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row text-center">
         <div class="col-12 col-md-6 columnaFlex columnaFlexResultados justify-content-start pt-3 py-md-0">
-            <app-breadcrumb-categorias [breadcrumbPath]="getbreadcrumbPath()"></app-breadcrumb-categorias>
+            <app-breadcrumb-categorias *ngIf="breadCrumb.length > 1" [breadcrumbPath]="getbreadcrumbPath()"></app-breadcrumb-categorias>
         </div>
         <div class="col-9 col-md-4 col-xl-5 columnaFlex columnaFlexResultados justify-content-start justify-content-md-end py-0">
             <span class="dropdownOrdenarEtiqueta">Ordenar por:</span>
@@ -36,11 +36,14 @@
         <div class="row text-center">
                 <div class="col-12 col-lg-3 text-left">
 
-                    <app-filtros-categorias 
+                    <app-filtros-categorias *ngIf="selectedCategoryName != null"
                         [currentCategoryName]="getCurrentCategoryName()"
                         [currentCategoryProductsCount]="getCurrentCategoryProductsCount()"
                         [currentCategoryChildren]="getCurrentCategoryChildren()">
                     </app-filtros-categorias>
+
+                    <span *ngIf="searchTerm != null" class="busquedaKeyword">{{ searchTerm }}</span>
+                    <span *ngIf="searchTerm != null" class="busquedaCantResultados">{{currentCategoryProductsCount}} Resultados</span>
                       
                     <app-filtros-atributos
                         *ngIf="!loading" 

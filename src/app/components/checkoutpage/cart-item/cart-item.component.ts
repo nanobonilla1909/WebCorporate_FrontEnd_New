@@ -3,6 +3,7 @@ import { CartItemDisplay } from '../../../models/cart-item-display';
 import { ApiWebcorporateService } from '../../../services/api-webcorporate.service';
 import { CartItemsQuantity } from '../../../services/cart-items-quantity';
 import { CartItem } from '../../../models/cart-item';
+import { GlobalVariable } from '../../../../environments/global';
 
 @Component({
   selector: 'app-cart-item',
@@ -17,8 +18,8 @@ export class CartItemComponent implements OnInit {
   quantityChanged: EventEmitter<number> = new EventEmitter<number>();
 
   new_cart_item: CartItem;
-  // adjustment_qty: number;
-  // cantidad: number;
+  
+  baseImagesLocation = GlobalVariable.BASE_IMAGES_LOCATION;
 
 
   constructor(private http: ApiWebcorporateService, private cart_items_service: CartItemsQuantity) { }

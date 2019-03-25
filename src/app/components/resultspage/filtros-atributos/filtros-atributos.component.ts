@@ -54,7 +54,7 @@ export class FiltrosAtributosComponent implements OnInit {
   ngDoCheck(): void {
     //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
     //Add 'implements DoCheck' to the class.
-    console.log("docheck");
+    // console.log("docheck");
     this.formulario = this.fb.group({
       precio_desde: [],
       precio_hasta: [],
@@ -64,33 +64,35 @@ export class FiltrosAtributosComponent implements OnInit {
 
   }
 
+  /*
+
   ngAfterContentInit(): void {
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
-    console.log("contentinit");
+    console.log("filtros-atributos: contentinit");
 
   }
 
   ngAfterContentChecked(): void {
     //Called after every check of the component's or directive's content.
     //Add 'implements AfterContentChecked' to the class.
-    console.log("contentchecked");
+    console.log("filtros-atributos: contentchecked");
 
   }
 
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
-    console.log("viewinit");
+    console.log("filtros-atributos: viewinit");
 
   }
 
   ngAfterViewChecked(): void {
     //Called after every check of the component's view. Applies to components only.
     //Add 'implements AfterViewChecked' to the class.
-    console.log("viewcheck");
+    console.log("filtros-atributos: viewcheck");
 
-  }
+  } */
 
 
 

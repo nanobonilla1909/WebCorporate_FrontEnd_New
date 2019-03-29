@@ -10,4 +10,5 @@ export class OrderItem {
     discount_label: string;
     discount_subtotal: number;
     is_a_gift: boolean;
+    image: string;
 }

@@ -5,14 +5,27 @@
 
     <div id="filtros">
 
+
+        <!-- <div *ngIf="opciones.length >0" id="opciones">
+
+            <span class="busquedaFiltrosItem" 
+              formArrayName="extra"
+              *ngFor="let item of formCheckboxesExtra.controls; let i = index">
+                <label>
+                    <input type="checkbox" [formControlName]="i" (change)="attributesSelectionChanged()"> {{ opciones[i] }}
+                </label>   
+            </span>   
+        </div>   -->
+
+
         <div *ngIf="product_attributes1.length >0" id="product_attributes1">
             <span class="busquedaFiltrosHeader">{{ product_attributes1[0].name }}</span>
             <span class="busquedaFiltrosItem" 
               formArrayName="product_attributes1"
               *ngFor="let item of formCheckboxesAttributes1.controls; let i = index">
-              <label >
-                  <input type="checkbox" [formControlName]="i" (change)="attributesSelectionChanged()"> {{ product_attributes1[i].value }}
-              </label>
+                <label>
+                    <input type="checkbox" [formControlName]="i" (change)="attributesSelectionChanged()"> {{ product_attributes1[i].value }}
+                </label>   
             </span>   
         </div>  
 
@@ -23,8 +36,8 @@
                 <span class="busquedaFiltrosItem" 
                   formArrayName="product_attributes2"
                   *ngFor="let item of formCheckboxesAttributes2.controls; let i = index">
-                  <label >
-                      <input type="checkbox" [formControlName]="i" (change)="attributesSelectionChanged()"> {{ product_attributes2[i].value }}
+                  <label>
+                      <input type="checkbox" [formControlName]="i" (change)="attributesSelectionChanged()" checked> {{ product_attributes2[i].value }}
                   </label>
                 </span>   
         </div>  
@@ -62,8 +75,8 @@
         
     </div>
 
-    <!-- <br>
-    <div>Informacion del Formulario</div>
+    <br>
+    <!-- <div>Informacion del Formulario</div>
     <pre>Form Valido:  {{ formulario.valid  }} </pre>
     <pre>Valores: <br> {{ formulario.value | json }} </pre> -->
 

@@ -10,7 +10,7 @@
 			<a class="busquedaFiltrosSubCategoria" 
 								[routerLink]="['/results']" 
 								[queryParams]="{ category_id: subCategory.category_id, 
-									category_name: subCategory.category_name }"
+									category_name: subCategory.category_name, source: 'subcateg'}"
 					>{{ subCategory.category_name }}
 					<span class="busquedaFiltrosItemCantidad">()</span>
 			</a>

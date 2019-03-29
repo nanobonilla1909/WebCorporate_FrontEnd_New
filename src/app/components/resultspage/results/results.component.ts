@@ -38,6 +38,7 @@ export class ResultsComponent implements OnInit {
   selectedCategory: number;
   selectedCategoryName: string;
   searchTerm: string;
+  navigation_source: string;
 
   view_type_active_grilla: boolean = false; 
   view_type_active_listado: boolean = true; 
@@ -49,7 +50,11 @@ export class ResultsComponent implements OnInit {
   products_results: Product[] = [];
   filtered_product_list: number[] = [];
   products_results_filtered: number[] = [];
-  products_results_filtered_attr2: number[] = [];
+  products_results_filtered_temp: number[] = [];
+  products_results_filtered_attr1: CharacterizedProduct[] = [];
+  products_results_filtered_attr2: CharacterizedProduct[] = [];
+  products_results_filtered_attr3: CharacterizedProduct[] = [];
+  products_results_filtered_attr4: CharacterizedProduct[] = [];
   characterized_products: CharacterizedProduct[] = [];
   characterized_products_sorted: CharacterizedProduct[] = [];
   product_attributes: AttributesValues[] = [];
@@ -60,6 +65,7 @@ export class ResultsComponent implements OnInit {
   // selectedAtributtes: {type_id: number, options_id: number}[] = [];
   selectedOptions1: number[] = [];
   selectedOptions2: number[] = [];
+  seleccionadasOpciones2: number[] = [];
   // selectedAtributtes1: boolean[] = [false, false, false, false];
   children_categories: any[] = [];
 
@@ -94,11 +100,13 @@ export class ResultsComponent implements OnInit {
       this.selectedCategory = +combined[1].get('category_id');
       this.selectedCategoryName  = combined[1].get('category_name');
       this.searchTerm  = combined[1].get('searchTerm');
+      this.navigation_source = combined[1].get('source');
       this.currentCategory = new CategoryNode(this.selectedCategory, this.selectedCategoryName, this.http); 
 
-      // console.log("this.selectedCategory: ",this.selectedCategory)
-      // console.log("this.selectedCategoryName: ",this.selectedCategoryName)
-      // console.log("this.searchTerm: ",this.searchTerm)
+      console.log("this.selectedCategory: ",this.selectedCategory)
+      console.log("this.selectedCategoryName: ",this.selectedCategoryName)
+      console.log("this.searchTerm: ",this.searchTerm)
+      console.log("this.navigation_source: ",this.navigation_source)
       
 
       // Inicializa Variables
@@ -106,12 +114,16 @@ export class ResultsComponent implements OnInit {
       this.qtyProductsSearchedTerm = 0;
       this.products_results = [];
       this.products_results_filtered = [];
+      this.products_results_filtered_attr1 = [];
       this.products_results_filtered_attr2 = [];
+      this.products_results_filtered_attr3 = [];
+      this.products_results_filtered_attr4 = [];
       this.characterized_products = [];
       this.characterized_products_sorted = [];
       this.product_attributes = [];
       this.selectedOptions1 = [];
       this.selectedOptions2 = [];
+      this.seleccionadasOpciones2 = [];
       this.children_categories = [];
    
 
@@ -126,14 +138,23 @@ export class ResultsComponent implements OnInit {
       if (this.selectedCategoryName != null) {
 
         // Prepara el breadcrumb
-        this.breadCrumb.push({categId: 0, categName: 'Inicio'});
+
+        if (this.navigation_source == 'menu_categ') {
+          this.breadCrumb = [];
+        }
+
+        if (this.breadCrumb.length == 0) {
+          this.breadCrumb.push({categId: 0, categName: 'Inicio'});
+        }
         this.breadCrumb.push({categId: this.selectedCategory, categName: this.selectedCategoryName});
       
+        this.navigation_source = '';
+
         // Trae Todos los Productos de la Categoria seleccionada
         this.http.getCategoryProductChildren(this.selectedCategory)
             .subscribe( (resp: any) => {
             this.products = resp.data;
-            console.log("Products", this.products)
+
             this.products_results = [];
             for (let unProd of this.products) {
               this.products_results.push({id: unProd.id, name:unProd.name, description:unProd.description, price: unProd.price, image: unProd.image})
@@ -157,38 +178,8 @@ export class ResultsComponent implements OnInit {
                     .subscribe( (resp: any) => {
                     this.characterized_products = resp.data;
 
-                    // Ordena los registros en: this.characterized_products_sorted 
-                    this.characterized_products_sorted = this.characterized_products.sort(
-                      function(a, b) {
-                        if (a.type_id === b.type_id) {
-                          return a.options_id - b.options_id;
-                        }
-                        return a.type_id > b.type_id ? 1 : -1;
-                      }
-                    );
-            
-                    this.initialize_product_attributes_1_to_4();
+                    this.arma_atributos();
 
-                    // Arma una lista unificada de Atributos y Valores (product_attributes)
-                    var type_id_ant = this.characterized_products_sorted[0].type_id;
-                    var options_id_ant = this.characterized_products_sorted[0].options_id;
-                    var name_ant = this.characterized_products_sorted[0].name;
-                    var value_ant = this.characterized_products_sorted[0].value;
-
-                    for(var i = 0; i < this.characterized_products_sorted.length; i++) {
-                      
-                      if (this.characterized_products_sorted[i].options_id != options_id_ant ||
-                        this.characterized_products_sorted[i].type_id != type_id_ant ) {
-
-                          this.product_attributes.push({type_id: type_id_ant, name: name_ant, options_id: options_id_ant, value: value_ant})
-                          type_id_ant = this.characterized_products_sorted[i].type_id;
-                          options_id_ant = this.characterized_products_sorted[i].options_id;
-                          name_ant = this.characterized_products_sorted[i].name;
-                          value_ant = this.characterized_products_sorted[i].value;
-
-                      }
-                    }
-                    this.product_attributes.push({type_id: type_id_ant, name: name_ant, options_id: options_id_ant, value: value_ant})
                     console.log("this.product_attributes: ", this.product_attributes);
                     // Hasta Aca trajo Todos los Productos Caracterizados, lo ordeno por id de caracteristica 
                     // y armo una Lista unica en product_attributes.
@@ -227,7 +218,6 @@ export class ResultsComponent implements OnInit {
         this.http.getSearchedProducts(this.searchTerm)
             .subscribe( (resp: any) => {
             this.products = resp.data;
-            console.log("Products", this.products)
 
                 this.products_results = [];
                 this.filtered_product_list = [];
@@ -270,47 +260,121 @@ export class ResultsComponent implements OnInit {
 
   newSelectionReceived(optionsSelected) {
 
-    
-    console.log("PASABBBBBBBB");
-
-
     this.selectedOptions1 = optionsSelected.attr1;
     this.selectedOptions2 = optionsSelected.attr2;
-
-
-    console.log(this.selectedOptions1);
-    console.log(this.selectedOptions2);
-
-    console.log("hasta ahi ahi");
+    this.seleccionadasOpciones2 = this.selectedOptions2;
+    const seleccionadasOpciones2  = [...this.selectedOptions2];
 
 
     this.products_results_filtered=[];
+    this.products_results_filtered_temp=[];
+    this.products_results_filtered_attr1=[];
     this.products_results_filtered_attr2=[];
+    this.products_results_filtered_attr3=[];
+    this.products_results_filtered_attr4=[];
     
-    for (let unProd of this.characterized_products) {
-      if(this.selectedOptions1.includes(unProd.options_id)){
-        this.products_results_filtered.push(unProd.product_id)
-      }
-    } 
+    if (this.selectedOptions1.length > 0) {
 
-    for (let unProd of this.characterized_products) {
-      if(this.selectedOptions2.includes(unProd.options_id)){
-        this.products_results_filtered_attr2.push(unProd.product_id)
-      }
-    } 
-
-
-    // console.log("products_results_filtered_attr2: " + this.products_results_filtered_attr2);
-    // console.log("products_results_filtered: " + this.products_results_filtered);
-    
-    if (this.products_results_filtered_attr2.length > 0) {
-      for(var i = 0; i < this.products_results_filtered.length; i++) {
-        if (this.products_results_filtered_attr2.includes(this.products_results_filtered[i])) {
-        } else{
-            delete this.products_results_filtered[i];
-        }
-      }
+        for (let unProd of this.characterized_products) {
+          if(this.selectedOptions1.includes(unProd.options_id)){
+            this.products_results_filtered_attr1.push(unProd)
+          }
+        } 
     }
+
+    if (this.selectedOptions2.length > 0) {
+
+      for (let unProd of this.characterized_products) {
+        if(this.selectedOptions2.includes(unProd.options_id)){
+          this.products_results_filtered_attr2.push(unProd)
+        }
+      } 
+    } 
+  
+    // A partir de aca deja solo los productos que estan filtrados.
+
+    if (this.products_results_filtered_attr1.length == 0) {
+        for (let unProd of this.characterized_products) {
+           this.products_results_filtered_temp.push(unProd.product_id)
+        } 
+    } else {
+        for (let unProd of this.products_results_filtered_attr1) {
+           this.products_results_filtered_temp.push(unProd.product_id)
+        } 
+    }
+
+    if (this.products_results_filtered_attr2.length == 0) {
+
+      for(var i = 0; i < this.products_results_filtered_temp.length; i++) {
+
+          this.products_results_filtered.push(this.products_results_filtered_temp[i]);
+      }
+    } else {
+
+        for(var i = 0; i < this.products_results_filtered_attr2.length; i++) {
+
+          if (this.products_results_filtered_temp.includes(this.products_results_filtered_attr2[i].product_id)) {
+            this.products_results_filtered.push(this.products_results_filtered_attr2[i].product_id);
+          }
+        }
+
+    }
+
+      
+
+    /* 
+
+    if (this.selectedOptions3.length = 0) { // copia todo el array products_results_filtered_attr2 array products_results_filtered_attr3
+      for (let unProd of this.products_results_filtered_attr2) {
+        
+        this.products_results_filtered_attr3.push(unProd)     
+      } 
+
+    } else {
+
+      for (let unProd of this.products_results_filtered_attr2) {
+        if(this.selectedOptions3.includes(unProd.options_id)){
+          this.products_results_filtered_attr3.push(unProd)
+        }
+      } 
+    }
+    
+    if (this.selectedOptions4.length = 0) { // copia todo el array products_results_filtered_attr2 array products_results_filtered_attr3
+      for (let unProd of this.products_results_filtered_attr3) {
+        
+        this.products_results_filtered_attr4.push(unProd)     
+      } 
+
+    } else {
+
+      for (let unProd of this.products_results_filtered_attr3) {
+        if(this.selectedOptions4.includes(unProd.options_id)){
+          this.products_results_filtered_attr4.push(unProd)
+        }
+      } 
+    }
+    */
+
+
+
+    console.log("products_results_filtered_attr2: " + this.products_results_filtered_attr2);
+    console.log("products_results_filtered: " + this.products_results_filtered);
+    
+
+    // for (let unProd of this.characterized_products) {
+    //   if(this.selectedOptions2.includes(unProd.options_id)){
+    //     this.products_results_filtered_attr2.push(unProd.product_id)
+    //   }
+    // } 
+
+    // if (this.products_results_filtered_attr2.length > 0) {
+    //   for(var i = 0; i < this.products_results_filtered.length; i++) {
+    //     if (this.products_results_filtered_attr2.includes(this.products_results_filtered[i])) {
+    //     } else{
+    //         delete this.products_results_filtered[i];
+    //     }
+    //   }
+    // }
     
   }
 

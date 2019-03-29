@@ -26,12 +26,15 @@ export class FiltrosCategoriasComponent implements OnInit {
     
   }
 
-  onClick(category_id: number, category_name: string) {
-     console.log(category_id, category_name);
-    this.router.navigate(['/results', { category_id: category_id, category_name: category_name}]);
+  // onClick(category_id: number, category_name: string) {
+
+  //   console.log("PASA POR EL ON CLCK!!");
+    
+  //    console.log(category_id, category_name);
+  //   this.router.navigate(['/results', { category_id: category_id, category_name: category_name}]);
    
 
-  }
+  // }
 
 
 }

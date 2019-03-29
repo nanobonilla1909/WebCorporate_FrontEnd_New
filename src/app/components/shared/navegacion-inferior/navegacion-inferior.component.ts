@@ -46,7 +46,7 @@ export class NavegacionInferiorComponent {
 
   onClick(category_id: number, category_name: string) {
     
-    this.router.navigate(['/results', { category_id: category_id, category_name: category_name}]);
+    this.router.navigate(['/results', { category_id: category_id, category_name: category_name, source: 'menu_categ'}]);
     // console.log(category_id);
 
   }

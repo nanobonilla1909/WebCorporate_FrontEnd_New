@@ -32,6 +32,10 @@ export class FiltrosAtributosComponent implements OnInit {
   product_attributes2: AttributesValues[];
 
   formulario: FormGroup;
+
+  a:number;
+  opciones: string[] = ['Opcion 1', 'Opcion 2'];
+
  
 
   constructor(private fb: FormBuilder) {
@@ -41,16 +45,20 @@ export class FiltrosAtributosComponent implements OnInit {
   ngOnInit() {
 
     console.log("PAS X INIT DE ATRIBUTOS");
+    console.log(this.product_attributes1);
     
     this.formulario = this.fb.group({
       precio_desde: [],
       precio_hasta: [],
       product_attributes1: this.buildProductAttributes1(),
-      product_attributes2: this.buildProductAttributes2()
+      product_attributes2: this.buildProductAttributes2(),
+      // extra: this.buildExtra()
     })
+    
   }
+  
 
-
+  /*
   ngDoCheck(): void {
     //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
     //Add 'implements DoCheck' to the class.
@@ -59,10 +67,85 @@ export class FiltrosAtributosComponent implements OnInit {
       precio_desde: [],
       precio_hasta: [],
       product_attributes1: this.buildProductAttributes1(),
-      product_attributes2: this.buildProductAttributes2()
+      product_attributes2: this.buildProductAttributes2(),
+      extra: this.buildExtra()
     })
 
+  } */
+
+  buildExtra() {
+
+    const values = this.opciones.map(v => new FormControl(true));
+
+    return this.fb.array(values);
   }
+
+  buildProductAttributes1() {
+
+    const values = this.product_attributes1.map(v => new FormControl(false));
+
+    return this.fb.array(values);
+  }
+
+  buildProductAttributes2() {
+
+    const values = this.product_attributes2.map(v => new FormControl(false));
+    return this.fb.array(values);
+  }
+
+
+  get formCheckboxesExtra() { 
+    
+    return <FormArray>this.formulario.get('extra'); 
+  }
+
+  get formCheckboxesAttributes1() { 
+    
+    return <FormArray>this.formulario.get('product_attributes1'); 
+  }
+
+  get formCheckboxesAttributes2() { 
+    
+    return <FormArray>this.formulario.get('product_attributes2'); 
+  }
+  
+
+
+  attributesSelectionChanged(){
+
+    this.selectedOptions1 = [];
+    this.selectedOptions2 = [];
+    
+    var product_attributes1_values = this.formulario.controls.product_attributes1.value
+    var product_attributes2_values = this.formulario.controls.product_attributes2.value
+
+    console.log("Paso 2: ", product_attributes1_values);
+
+    for(var i = 0; i < product_attributes1_values.length; i++) {
+       if (product_attributes1_values[i]) {
+          this.selectedOptions1.push(this.product_attributes1[i].options_id);
+       }
+    }  
+
+    // console.log("this.product_attributes1: ", this.product_attributes1);
+    // console.log("product_attributes1_values: ", product_attributes1_values);
+    // console.log("selectedOptions1: ", this.selectedOptions1);
+   
+ 
+
+    for(var i = 0; i < product_attributes2_values.length; i++) {
+      if (product_attributes2_values[i]) {
+         this.selectedOptions2.push(this.product_attributes2[i].options_id);
+      }
+   }  
+
+    console.log("ESTOS SON LOS SELECTED OPTIONS");
+    console.log(this.selectedOptions1);
+    console.log(this.selectedOptions2);
+    this.selectionChanged.emit({attr1: this.selectedOptions1, attr2: this.selectedOptions2}); 
+  }
+
+
 
   /*
 
@@ -95,56 +178,5 @@ export class FiltrosAtributosComponent implements OnInit {
   } */
 
 
-
-  buildProductAttributes1() {
-
-    const values = this.product_attributes1.map(v => new FormControl(false));
-    return this.fb.array(values);
-  }
-
-  buildProductAttributes2() {
-
-    const values = this.product_attributes2.map(v => new FormControl(false));
-    return this.fb.array(values);
-  }
-
-
-  get formCheckboxesAttributes1() { 
-    
-    return <FormArray>this.formulario.get('product_attributes1'); 
-  }
-
-  get formCheckboxesAttributes2() { 
-    
-    return <FormArray>this.formulario.get('product_attributes2'); 
-  }
-  
-
-
-  attributesSelectionChanged(){
-
-    this.selectedOptions1 = [];
-    this.selectedOptions2 = [];
-    
-    var product_attributes1_values = this.formulario.controls.product_attributes1.value
-    var product_attributes2_values = this.formulario.controls.product_attributes2.value
-  
-    for(var i = 0; i < product_attributes1_values.length; i++) {
-       if (product_attributes1_values[i]) {
-          this.selectedOptions1.push(this.product_attributes1[i].options_id);
-       }
-    }  
-
-    for(var i = 0; i < product_attributes2_values.length; i++) {
-      if (product_attributes2_values[i]) {
-         this.selectedOptions2.push(this.product_attributes2[i].options_id);
-      }
-   }  
-
-    // console.log("ESTOS SON LOS SELECTED OPTIONS");
-    // console.log(this.selectedOptions1);
-    // console.log(this.selectedOptions2);
-    this.selectionChanged.emit({attr1: this.selectedOptions1, attr2: this.selectedOptions2}); 
-  }
 
 }

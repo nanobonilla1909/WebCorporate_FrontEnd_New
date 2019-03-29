@@ -244,25 +244,28 @@ export class PaymentComponent implements OnInit {
     
             var new_item = new OrderItem();
             new_item.product_id = cart_item.product_id;
-            new_item.description  = "REEMPLAZAR ESTOOO!!!" // cart_item.description;
+            new_item.description  = cart_item.name;
+            new_item.image  = cart_item.image;
             new_item.quantity  = cart_item.quantity;
             new_item.price_list  = cart_item.price;
             new_item.price  = cart_item.price;
             new_item.discount_subtotal  = cart_item.discount_amount;
             new_item.subtotal  = cart_item.price - cart_item.discount_amount;
             new_item.is_a_gift  = false;
-    
-            this.new_order.order_items.push(new_item);
-
-            this.http.createOrder(this.new_order)
-            .subscribe( (resp: any) => {
-              console.log(resp);
-
-              this.showOrderPlacedDialog();
-        
-            });  
+            
+            this.new_order.order_items.push(new_item);        
     
         }   
+
+
+        this.http.createOrder(this.new_order)
+        .subscribe( (resp: any) => {
+          console.log(resp);
+
+          this.showOrderPlacedDialog();
+    
+        });  
+
     } else {
 
       this.openFormWithErrorDialog();

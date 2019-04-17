@@ -19,6 +19,9 @@ export class FeaturedProductsHomeComponent implements OnInit {
       .subscribe( (resp: any) => {
         this.featured_products = resp.data;
 
+        console.log("this.featured_products: ", this.featured_products);
+        
+
       });
 
 

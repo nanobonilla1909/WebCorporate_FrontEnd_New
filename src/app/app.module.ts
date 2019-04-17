@@ -29,6 +29,11 @@ import { FiltrosAtributosComponent } from './components/resultspage/filtros-atri
 import { ProductResultsFilterPipe } from './components/resultspage/results/product-results-fliter.pipe';
 import { CheckoutComponent } from './components/checkoutpage/checkout/checkout.component';
 import { CartComponent } from './components/checkoutpage/cart/cart.component';
+import { CartItemComponent } from './components/checkoutpage/cart-item/cart-item.component';
+import { StepperComponent } from './components/checkoutpage/stepper/stepper.component';
+import { ShippingComponent } from './components/checkoutpage/shipping/shipping.component';
+import { PaymentComponent } from './components/checkoutpage/payment/payment.component';
+import { ProductDetailComponent } from './components/shared/product-detail/product-detail.component';
 
 
 // Importar Rutas
@@ -37,11 +42,9 @@ import { ROUTES } from './app.routes';
 // Importar Servicios
 import { ApiWebcorporateService } from './services/api-webcorporate.service';
 import { CartItemsQuantity } from './services/cart-items-quantity';
-import { CartItemComponent } from './components/checkoutpage/cart-item/cart-item.component';
-import { StepperComponent } from './components/checkoutpage/stepper/stepper.component';
-import { ShippingComponent } from './components/checkoutpage/shipping/shipping.component';
-import { PaymentComponent } from './components/checkoutpage/payment/payment.component';
-import { ProductDetailComponent } from './components/shared/product-detail/product-detail.component';
+import { AuthService } from './services/auth.service'
+
+
 
 // Modulos de Angular Material
 import { MatDialogModule } from '@angular/material/dialog';
@@ -101,6 +104,7 @@ import { MyOrdersComponent } from './components/profile/my-orders/my-orders.comp
   ],
   providers: [
     ApiWebcorporateService,
+    AuthService,
     CartItemsQuantity
   ],
   bootstrap: [AppComponent]

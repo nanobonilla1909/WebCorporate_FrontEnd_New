@@ -36,6 +36,9 @@ export class NavegacionInferiorComponent {
       .subscribe( (resp: any) => {
         this.categorias = resp.data;
 
+       console.log("this.categorias: ", this.categorias);
+       
+
         this.categoriasVisibles = this.filterByPosition(this.categorias, {min:1, max:8})
         this.categoriasNoVisibles = this.filterByPosition(this.categorias, {min:9, max:11})
 

@@ -23,7 +23,6 @@ export class ApiWebcorporateService {
 
   getCategoriesOrder() 
   {
-    let f = 1;
     return this.http.get(this.baseApiUrl + '/home_page_category_orders');
   }
 
